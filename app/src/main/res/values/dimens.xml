@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Navigation Drawer dimens -->
+    <!-- Adjustment for status bar height, defined for v21 and <v21 -->
+    <dimen name="nav_drawer_header_top_margin">0dp</dimen>
+
+
+    <!-- Card View dimens -->
+    <!-- Below v21 card view cannot clip rounded corner, so keeping radius 0dp -->
+    <dimen name="card_view_corner_radius">0dp</dimen>
+
+</resources>

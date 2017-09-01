@@ -1,0 +1,114 @@
+<resources>
+
+    <!-- Primary text appearance with large/medium/small text sizes -->
+    <style name="TextAppearance.App.Primary" parent="TextAppearance.AppCompat.Large" />
+
+    <style name="TextAppearance.App.Primary.Large">
+        <item name="android:textSize">@dimen/text_size_large</item>
+    </style>
+
+    <style name="TextAppearance.App.Primary.Medium">
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+
+    <style name="TextAppearance.App.Primary.Small">
+        <item name="android:textSize">@dimen/text_size_small</item>
+    </style>
+
+
+    <!-- Primary inverse text appearance with large/medium/small text sizes -->
+    <style name="TextAppearance.App.Primary.Inverse" parent="TextAppearance.AppCompat.Large.Inverse" />
+
+    <style name="TextAppearance.App.Primary.Inverse.Large">
+        <item name="android:textSize">@dimen/text_size_large</item>
+    </style>
+
+    <style name="TextAppearance.App.Primary.Inverse.Medium">
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+
+    <style name="TextAppearance.App.Primary.Inverse.Small">
+        <item name="android:textSize">@dimen/text_size_small</item>
+    </style>
+
+
+    <!-- Secondary text appearance with large/medium/small text sizes -->
+    <style name="TextAppearance.App.Secondary" parent="TextAppearance.AppCompat.Medium" />
+
+    <style name="TextAppearance.App.Secondary.Large">
+        <item name="android:textSize">@dimen/text_size_large</item>
+    </style>
+
+    <style name="TextAppearance.App.Secondary.Medium">
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+
+    <style name="TextAppearance.App.Secondary.Small">
+        <item name="android:textSize">@dimen/text_size_small</item>
+    </style>
+
+
+    <!-- Secondary inverse text appearance with large/medium/small text sizes -->
+    <style name="TextAppearance.App.Secondary.Inverse" parent="TextAppearance.AppCompat.Medium.Inverse" />
+
+    <style name="TextAppearance.App.Secondary.Inverse.Large">
+        <item name="android:textSize">@dimen/text_size_large</item>
+    </style>
+
+    <style name="TextAppearance.App.Secondary.Inverse.Medium">
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+
+    <style name="TextAppearance.App.Secondary.Inverse.Small">
+        <item name="android:textSize">@dimen/text_size_small</item>
+    </style>
+
+
+    <!-- AppBarLayout style -->
+    <style name="Widget.App.AppBarLayout" parent="Widget.Design.AppBarLayout">
+        <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+    </style>
+
+
+    <!-- Card view styles -->
+    <style name="Widget.App.CardView" parent="CardView.Light">
+        <item name="cardCornerRadius">@dimen/card_view_corner_radius</item>
+        <item name="cardElevation">@dimen/card_view_elevation</item>
+        <item name="cardPreventCornerOverlap">false</item>
+        <item name="android:foreground">@drawable/selector_card_view_foreground</item>
+    </style>
+
+    <!-- Home screen card style -->
+    <style name="Widget.App.CardView.Home">
+        <item name="contentPaddingLeft">@dimen/widget_inner_padding_medium</item>
+        <item name="contentPaddingRight">@dimen/widget_inner_padding_medium</item>
+        <item name="contentPaddingTop">@dimen/widget_inner_padding_large</item>
+        <item name="contentPaddingBottom">@dimen/widget_inner_padding_large</item>
+    </style>
+
+    <!-- Category screen card style -->
+    <style name="Widget.App.CardView.Category">
+        <item name="cardBackgroundColor">@color/category_card_background_color</item>
+    </style>
+
+    <!-- Product screen card style -->
+    <style name="Widget.App.CardView.Product">
+        <item name="cardBackgroundColor">@color/product_card_background_color</item>
+    </style>
+
+
+    <!-- Breadcrumb view style -->
+    <style name="Widget.App.BreadcrumbView" parent="" />
+
+    <!-- Breadcrumb section view style -->
+    <style name="Widget.App.BreadcrumbSectionView" parent="">
+        <item name="separator">@drawable/selector_breadcrumb_separator</item>
+        <item name="android:textAppearance">@style/TextAppearance.App.Primary.Inverse.Medium</item>
+        <item name="android:textColor">@color/color_breadcrumb_section_text</item>
+        <item name="android:paddingLeft">@dimen/breadcrumb_section_lr_padding</item>
+        <item name="android:paddingRight">@dimen/breadcrumb_section_lr_padding</item>
+        <item name="android:drawablePadding">@dimen/breadcrumb_section_drawable_padding</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
+
+</resources>

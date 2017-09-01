@@ -1,0 +1,18 @@
+INSERT INTO "categories" VALUES(1,'TVs & Entertainment',1,-1,'file:///android_asset/images/categories/tv_and_entertainment.jpg');
+INSERT INTO "categories" VALUES(2,'Mobile',0,-1,'file:///android_asset/images/categories/mobile.jpg');
+INSERT INTO "categories" VALUES(3,'Camcorders',0,-1,'file:///android_asset/images/categories/camcorders.jpg');
+INSERT INTO "categories" VALUES(4,'Photography',0,-1,'file:///android_asset/images/categories/photography.jpg');
+INSERT INTO "categories" VALUES(5,'Computers',0,-1,'file:///android_asset/images/categories/computers.jpg');
+INSERT INTO "categories" VALUES(6,'Video',0,-1,'file:///android_asset/images/categories/video.jpg');
+INSERT INTO "categories" VALUES(7,'Audio',0,-1,'file:///android_asset/images/categories/audio.jpg');
+INSERT INTO "categories" VALUES(8,'Surveillance',0,-1,'file:///android_asset/images/categories/surveillance.jpg');
+INSERT INTO "categories" VALUES(9,'Binoculars',0,-1,'file:///android_asset/images/categories/binoculars.jpg');
+INSERT INTO "categories" VALUES(10,'Televisions',0,1,'file:///android_asset/images/categories/televisions.jpg');
+INSERT INTO "categories" VALUES(11,'Home Theaters',1,1,'file:///android_asset/images/categories/home_theaters.jpg');
+INSERT INTO "categories" VALUES(12,'Multisystem TVs',0,1,'file:///android_asset/images/categories/multi_systems.jpg');
+INSERT INTO "categories" VALUES(13,'Projectors',0,1,'file:///android_asset/images/categories/projectors.jpg');
+INSERT INTO "categories" VALUES(14,'Gaming',0,1,'file:///android_asset/images/categories/gaming.jpg');
+INSERT INTO "categories" VALUES(15,'Blu-ray DVD Players',0,1,'file:///android_asset/images/categories/bluray_dvd_players.jpg');
+INSERT INTO "categories" VALUES(16,'Speakers',0,1,'file:///android_asset/images/categories/speakers.jpg');
+INSERT INTO "categories" VALUES(17,'Home Theater Box',0,11,'file:///android_asset/images/categories/home_theater_box.jpg');
+INSERT INTO "categories" VALUES(18,'Receivers',0,11,'file:///android_asset/images/categories/receivers.jpg');

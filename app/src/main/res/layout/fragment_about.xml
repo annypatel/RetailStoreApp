@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data class=".about.AboutFragmentBinding">
+
+        <import type="com.vertaperic.store.BuildConfig" />
+
+        <import type="java.util.Calendar" />
+
+        <variable
+            name="actionHandler"
+            type="com.vertaperic.store.about.AboutContract.Presenter" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.design.widget.AppBarLayout
+            style="@style/Widget.App.AppBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:menuItemClickListener="@{actionHandler}"
+                app:navigationIcon="@drawable/ic_toolbar_navigation_drawer"
+                app:navigationOnClickListener="@{actionHandler}"
+                app:title="@string/about_screen_title" />
+
+        </android.support.design.widget.AppBarLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/widget_inner_padding_small"
+                android:drawableTop="@drawable/ic_app_logo_small"
+                android:text="@string/application_name"
+                android:textAppearance="@style/TextAppearance.App.Primary.Large" />
+
+            <TextView
+                android:id="@+id/textVersion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{@string/about_version(BuildConfig.VERSION_NAME)}"
+                android:textAppearance="@style/TextAppearance.App.Secondary.Small" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/widget_inner_margin_medium"
+                android:gravity="center_horizontal"
+                android:text="@{@string/about_company_copyright_text(Calendar.getInstance().get(Calendar.YEAR))}"
+                android:textAppearance="@style/TextAppearance.App.Secondary.Small" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>

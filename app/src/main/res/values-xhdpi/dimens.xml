@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Text sizes -->
+    <dimen name="text_size_large">20sp</dimen>
+    <dimen name="text_size_medium">16sp</dimen>
+    <dimen name="text_size_small">12sp</dimen>
+
+
+    <!-- Margin and Padding -->
+    <dimen name="layout_outer_padding">12dp</dimen>
+    <dimen name="widget_inner_margin_large">16dp</dimen>
+    <dimen name="widget_inner_margin_medium">10dp</dimen>
+    <dimen name="widget_inner_margin_small">8dp</dimen>
+    <dimen name="widget_inner_padding_large">16dp</dimen>
+    <dimen name="widget_inner_padding_medium">10dp</dimen>
+    <dimen name="widget_inner_padding_small">8dp</dimen>
+
+
+    <!-- Home screen dimens -->
+    <dimen name="home_cards_overlap_top_margin">32dp</dimen>
+    <dimen name="home_appbar_height">352dp</dimen>
+
+
+    <!-- Category screen dimens -->
+    <dimen name="category_card_height">172dp</dimen>
+
+
+    <!-- Products screen dimens -->
+    <dimen name="product_image_height">84dp</dimen>
+    <dimen name="product_image_width">84dp</dimen>
+
+
+    <!-- Products Details screen dimens -->
+    <dimen name="product_detail_appbar_height">256dp</dimen>
+    <dimen name="product_detail_image_margin">48dp</dimen>
+
+
+    <!-- Search screen dimens -->
+    <dimen name="search_card_content_padding">48dp</dimen>
+    <dimen name="search_coming_soon_text_size">36sp</dimen>
+
+</resources>

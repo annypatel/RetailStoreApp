@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data class=".browse.BrowseFragmentBinding">
+
+        <variable
+            name="actionHandler"
+            type="com.vertaperic.store.browse.BrowseContract.Presenter" />
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.AppBarLayout
+            style="@style/Widget.App.AppBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_scrollFlags="scroll|snap|enterAlways"
+                app:menuItemClickListener="@{actionHandler}"
+                app:navigationIcon="@drawable/ic_toolbar_navigation_drawer"
+                app:navigationOnClickListener="@{actionHandler}"
+                app:title="@string/browse_screen_title" />
+
+            <com.vertaperic.store.widget.BreadcrumbsView
+                android:id="@+id/breadcrumbsView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/secondary_appbar_height"
+                android:paddingLeft="@dimen/breadcrumbs_view_left_padding"
+                android:paddingStart="@dimen/breadcrumbs_view_left_padding"
+                tools:ignore="RtlSymmetry" />
+
+        </android.support.design.widget.AppBarLayout>
+
+        <FrameLayout
+            android:id="@+id/childContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    </android.support.design.widget.CoordinatorLayout>
+</layout>

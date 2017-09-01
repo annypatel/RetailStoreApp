@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Application color palette -->
+    <color name="app_primary_color">#FFFF9800</color>
+    <color name="app_primary_dark_color">#FFF57C00</color>
+    <color name="app_accent_color">#FFFF9800</color>
+    <color name="app_control_normal_color">#8A000000</color>
+    <color name="app_control_activated_color">@color/app_accent_color</color>
+    <color name="app_control_highlight_color">@color/selectable_item_pressed_color</color>
+    <color name="app_switch_thumb_normal_color">#FF858585</color>
+    <color name="app_window_background_color">#FFF3F3F3</color>
+    <color name="app_edge_effect_color">@color/app_accent_color</color>
+    <color name="app_divider_color">#FFBDBDBD</color>
+
+
+    <!-- Text colors -->
+    <color name="primary_default_text_color">#DE000000</color>
+    <color name="primary_disabled_text_color">#39000000</color>
+    <color name="primary_inverse_default_text_color">#FFFFFFFF</color>
+    <color name="primary_inverse_disabled_text_color">#8DFFFFFF</color>
+    <color name="secondary_default_text_color">#8A000000</color>
+    <color name="secondary_disabled_text_color">#24000000</color>
+    <color name="secondary_inverse_default_text_color">#B3FFFFFF</color>
+    <color name="secondary_inverse_disabled_text_color">#36FFFFFF</color>
+
+
+    <!-- Selectable item background colors -->
+    <color name="selectable_item_normal_color">#00000000</color>
+    <color name="selectable_item_pressed_color">#60FF9800</color>
+    <color name="selectable_item_focused_color">#80FF9800</color>
+    <color name="selectable_item_disable_color">#7F000000</color>
+
+
+    <!-- Random card colors -->
+    <color name="card_background_color_1">#FF0E92D3</color>
+    <color name="card_background_color_2">#FFD32910</color>
+    <color name="card_background_color_3">#FFDEAD13</color>
+
+
+    <!-- Category screen colors -->
+    <color name="category_name_background_color">#55000000</color>
+    <color name="category_card_background_color">#FFFFFFFF</color>
+
+
+    <!-- Product screen colors -->
+    <color name="product_card_background_color">#FFFFFFFF</color>
+
+
+    <!-- Product details screen colors -->
+    <color name="product_image_background_color">#FFFFFFFF</color>
+
+
+</resources>

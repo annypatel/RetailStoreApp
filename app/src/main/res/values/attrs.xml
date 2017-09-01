@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- style attributes for BreadcrumbsView -->
+    <attr name="breadcrumbsViewStyle" format="reference" />
+
+    <!-- style attributes for BreadcrumbsSectionView -->
+    <attr name="breadcrumbsSectionViewStyle" format="reference" />
+    <declare-styleable name="BreadcrumbSectionView">
+        <attr name="separator" format="reference" />
+    </declare-styleable>
+
+</resources>

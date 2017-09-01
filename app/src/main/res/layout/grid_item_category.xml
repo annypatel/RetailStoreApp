@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data class=".category.CategoryGridItemBinding">
+
+        <import type="android.widget.ImageView.ScaleType" />
+
+        <variable
+            name="category"
+            type="com.vertaperic.store.category.Category" />
+
+        <variable
+            name="actionHandler"
+            type="com.vertaperic.store.category.CategoriesContract.Presenter" />
+
+    </data>
+
+    <android.support.v7.widget.CardView
+        style="@style/Widget.App.CardView.Category"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/category_card_height"
+        android:onClick="@{() -> actionHandler.selectCategory(category)}">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="@{category.parentCategoryId == -1 ? ScaleType.CENTER_CROP : ScaleType.CENTER_INSIDE}"
+            android:src="@{category.imageUri}"
+            app:placeHolder="@{@drawable/ic_image_place_holder}"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/category_name_background_color"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:padding="@dimen/widget_inner_padding_small"
+            android:text="@{category.name}"
+            android:textAppearance="@style/TextAppearance.App.Primary.Inverse.Medium" />
+
+    </android.support.v7.widget.CardView>
+
+</layout>

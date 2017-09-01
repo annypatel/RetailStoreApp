@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data class=".search.SearchFragmentBinding">
+
+        <variable
+            name="actionHandler"
+            type="com.vertaperic.store.search.SearchContract.Presenter" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.design.widget.AppBarLayout
+            style="@style/Widget.App.AppBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:menuItemClickListener="@{actionHandler}"
+                app:navigationIcon="@drawable/ic_toolbar_navigation_drawer"
+                app:navigationOnClickListener="@{actionHandler}"
+                app:title="@string/search_screen_title" />
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v7.widget.CardView
+            style="@style/Widget.App.CardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/layout_outer_padding"
+            app:cardBackgroundColor="@color/card_background_color_1"
+            app:contentPaddingBottom="@dimen/search_card_content_padding"
+            app:contentPaddingTop="@dimen/search_card_content_padding">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/search_coming_soon"
+                android:textAppearance="@style/TextAppearance.App.Primary.Inverse.Large"
+                android:textSize="@dimen/search_coming_soon_text_size"
+                android:textStyle="bold" />
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+</layout>

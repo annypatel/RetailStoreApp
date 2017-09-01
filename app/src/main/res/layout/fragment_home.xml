@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data class=".home.HomeFragmentBinding">
+
+        <variable
+            name="actionHandler"
+            type="com.vertaperic.store.home.HomeContract.Presenter" />
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <android.support.design.widget.AppBarLayout
+            style="@style/Widget.App.AppBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/home_appbar_height"
+            android:fitsSystemWindows="true">
+
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:contentScrim="?attr/colorPrimary"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:titleEnabled="false">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fitsSystemWindows="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_home_banner"
+                    app:layout_collapseMode="pin"
+                    tools:ignore="ContentDescription" />
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="pin"
+                    app:menuItemClickListener="@{actionHandler}"
+                    app:navigationIcon="@drawable/ic_toolbar_navigation_drawer"
+                    app:navigationOnClickListener="@{actionHandler}"
+                    app:title="@string/application_name" />
+
+            </android.support.design.widget.CollapsingToolbarLayout>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:behavior_overlapTop="@dimen/home_cards_overlap_top_margin"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:orientation="vertical"
+                android:padding="@dimen/widget_inner_padding_medium">
+
+                <android.support.v7.widget.CardView
+                    style="@style/Widget.App.CardView.Home"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/widget_inner_margin_medium"
+                    android:onClick="@{() -> actionHandler.browseProducts()}"
+                    app:cardBackgroundColor="@color/card_background_color_1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/home_shop_now_title"
+                            android:textAppearance="@style/TextAppearance.App.Primary.Inverse.Large" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/widget_inner_margin_medium"
+                            android:text="@string/home_shop_now_message"
+                            android:textAppearance="@style/TextAppearance.App.Primary.Inverse.Small" />
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    style="@style/Widget.App.CardView.Home"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/widget_inner_margin_medium"
+                    android:onClick="@{() -> actionHandler.createGiftCard()}"
+                    app:cardBackgroundColor="@color/card_background_color_2">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/home_gift_card_title"
+                            android:textAppearance="@style/TextAppearance.App.Primary.Inverse.Large" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/widget_inner_margin_medium"
+                            android:text="@string/home_gift_card_message"
+                            android:textAppearance="@style/TextAppearance.App.Primary.Inverse.Small" />
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    style="@style/Widget.App.CardView.Home"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> actionHandler.createWishList()}"
+                    app:cardBackgroundColor="@color/card_background_color_3">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/home_wish_list_title"
+                            android:textAppearance="@style/TextAppearance.App.Primary.Inverse.Large" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/widget_inner_margin_medium"
+                            android:text="@string/home_wish_list_message"
+                            android:textAppearance="@style/TextAppearance.App.Primary.Inverse.Small" />
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
+    </android.support.design.widget.CoordinatorLayout>
+</layout>

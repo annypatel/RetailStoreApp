@@ -1,0 +1,76 @@
+<resources>
+
+    <!-- Application strings -->
+    <string name="application_name">One Stop Shop</string>
+
+
+    <!-- Navigation Drawer strings -->
+    <string name="nav_drawer_item_home">Home</string>
+    <string name="nav_drawer_item_browse">Browse</string>
+    <string name="nav_drawer_item_search">Search</string>
+    <string name="nav_drawer_item_about">About</string>
+    <!-- dummy avatar name and email -->
+    <string name="dummy_avatar_name">Anny Patel</string>
+    <string name="dummy_avatar_email">anny.p@vertaperic.com</string>
+
+
+    <!-- Home screen strings -->
+    <string name="home_shop_now_title">Shop Now</string>
+    <string name="home_shop_now_message">Browse through our categories and products.</string>
+    <string name="home_gift_card_title">Gift Cards</string>
+    <string name="home_gift_card_message">Never expires, work online &amp; in-store, free shipping in India.</string>
+    <string name="home_wish_list_title">Wishlists</string>
+    <string name="home_wish_list_message">Sign in to start making wishlists. Don\'t Have account? No worries, creating one is a breeze.</string>
+    <string name="home_coming_soon">Coming Soon!</string>
+
+
+    <!-- Browse screen strings -->
+    <string name="browse_screen_title">Shop</string>
+
+
+    <!-- Category screen strings -->
+    <string name="category_all_categories">All Categories</string>
+    <string name="category_no_categories_found">No categories found</string>
+
+
+    <!-- Products screen strings -->
+    <string name="product_price_format">$%.2f</string>
+    <string name="product_no_products_found">No products found</string>
+
+
+    <!-- Products Details screen strings -->
+    <string name="product_detail_in_stock">In Stock</string>
+    <string name="product_detail_highlight">Product Highlights</string>
+    <string name="product_detail_description">Product Description</string>
+    <string name="product_detail_added_to_cart">Successfully added to cart</string>
+    <string name="product_detail_unable_to_add_to_cart">Unable to add this item to cart</string>
+    <!-- hard coded strings for demo purpose -->
+    <string name="product_detail_default_highlight">&#8226; GSM / 4G LTE Capable\n&#8226; 13MP Rear + 5MP Front Cameras\n&#8226; 5-Element f/2.0 Lens + Dual LED Flash\n&#8226; Quad-Core 1.8 GHz Intel Atom CPU\n&#8226; 16GB Storage Capacity + 2GB of RAM\n&#8226; 5.5" IPS LCD Display\n&#8226; Full HD 1920 x 1080 Resolution\n&#8226; microSDXC Expansion up to 64GB\n&#8226; 3000mAh Battery + Dual SIM Card Slots\n&#8226; Android Lollipop 5.0</string>
+    <string name="product_detail_default_description">Experience dynamic handheld performance with the US Version of the Glacier Gray ZenFone 2 ZE551ML Smartphone from ASUS. This smartphone features a quad-core 1.8 GHz Intel Atom Z3560 processor and a powerful 2GB of built-in RAM.\n\nIt also comes equipped with 16GB of storage and includes a microSDXC slot that supports cards with up to 64GB of memory for additional storage capacity. The integrated micro-USB interface allows you to connect the device for mass-storage purposes and also serves as a charging port. Additionally, you can use the micro-USB port to connect an optional MHL adapter for outputting video to an external display.</string>
+
+
+    <!-- My Cart screen strings -->
+    <string name="my_cart_screen_title">My Cart</string>
+    <string name="my_cart_total_price">Total Price: $%.2f</string>
+    <string name="my_cart_no_item_found">You haven\'t added any item to cart</string>
+    <string name="my_cart_remove_confirm_title">Remove</string>
+    <string name="my_cart_remove_confirm_message">Remove this item from cart?</string>
+    <string name="my_cart_button_remove">Remove</string>
+    <string name="my_cart_button_cancel">Cancel</string>
+    <string name="my_cart_item_removed_from_cart">Item removed from cart</string>
+    <string name="my_cart_unable_to_remove_item_from_cart">Unable to remove the item from cart</string>
+    <!-- toolbar action strings -->
+    <string name="toolbar_action_my_cart">My Cart</string>
+
+
+    <!-- Search screen strings -->
+    <string name="search_screen_title">Search</string>
+    <string name="search_coming_soon">COMING SOON!</string>
+
+
+    <!-- About screen strings -->
+    <string name="about_screen_title">About</string>
+    <string name="about_version">Version %1$s</string>
+    <string name="about_company_copyright_text">\u00a9 %1$s Vert Aperic.\nAll rights reserved.</string>
+
+</resources>

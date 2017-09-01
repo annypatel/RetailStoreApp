@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base application theme for API version below 21 -->
+    <style name="Base.Theme.App" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- selectable item backgrounds -->
+        <item name="android:selectableItemBackground">@drawable/selectable_item_background</item>
+        <item name="selectableItemBackground">@drawable/selectable_item_background</item>
+        <item name="listChoiceBackgroundIndicator">@drawable/selectable_item_background</item>
+        <item name="android:listChoiceBackgroundIndicator">@drawable/selectable_item_background
+        </item>
+    </style>
+
+    <!-- Main application theme -->
+    <style name="Theme.App" parent="Base.Theme.App">
+        <!-- no actionbar -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <!-- android color palette -->
+        <item name="colorPrimary">@color/app_primary_color</item>
+        <item name="colorPrimaryDark">@color/app_primary_dark_color</item>
+        <item name="colorAccent">@color/app_accent_color</item>
+        <item name="colorControlNormal">@color/app_control_normal_color</item>
+        <item name="colorControlActivated">@color/app_control_activated_color</item>
+        <item name="colorControlHighlight">@color/app_control_highlight_color</item>
+        <item name="colorSwitchThumbNormal">@color/app_switch_thumb_normal_color</item>
+
+        <!-- window background -->
+        <item name="android:windowBackground">@color/app_window_background_color</item>
+
+        <!-- text colors -->
+        <item name="android:textColorPrimary">@color/color_primary_text</item>
+        <item name="android:textColorPrimaryInverse">@color/color_primary_inverse_text</item>
+        <item name="android:textColorSecondary">@color/color_secondary_text</item>
+        <item name="android:textColorSecondaryInverse">@color/color_secondary_inverse_text</item>
+
+        <!-- Breadcrumbs view and section style -->
+        <item name="breadcrumbsViewStyle">@style/Widget.App.BreadcrumbView</item>
+        <item name="breadcrumbsSectionViewStyle">@style/Widget.App.BreadcrumbSectionView</item>
+
+    </style>
+
+
+    <!-- Theme for splash screen -->
+    <style name="Theme.App.SplashScreen">
+        <item name="android:windowBackground">@drawable/layer_splash_screen_background</item>
+    </style>
+
+
+    <!-- Base theme with transparent status bar -->
+    <style name="Base.Theme.App.NoStatusBar" parent="Theme.App" />
+
+    <!-- Theme with transparent status bar -->
+    <style name="Theme.App.NoStatusBar" parent="Base.Theme.App.NoStatusBar" />
+
+</resources>
