@@ -13,5 +13,5 @@ import android.view.MenuItem;
  *
  * @author Anny Patel
  */
-public interface BasePresenter {
+public interface IPresenter {
 }

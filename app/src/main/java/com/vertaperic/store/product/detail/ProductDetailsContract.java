@@ -9,8 +9,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.MenuItem;
 
-import com.vertaperic.store.app.BasePresenter;
-import com.vertaperic.store.app.BaseView;
+import com.vertaperic.store.app.IPresenter;
+import com.vertaperic.store.app.IView;
 import com.vertaperic.store.cart.CartItem;
 import com.vertaperic.store.product.Product;
 
@@ -24,7 +24,7 @@ public interface ProductDetailsContract {
     /**
      * The view interface for Product details screen functionality.
      */
-    interface View extends BaseView {
+    interface View extends IView {
 
         /**
          * To set the visibility of loading indicator.
@@ -77,7 +77,7 @@ public interface ProductDetailsContract {
     /**
      * The presenter interface for Product details screen functionality.
      */
-    interface Presenter extends BasePresenter {
+    interface Presenter extends IPresenter {
 
         /**
          * Called when the toolbar navigation icon is clicked.

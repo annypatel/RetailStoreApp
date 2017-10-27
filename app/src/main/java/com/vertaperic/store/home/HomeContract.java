@@ -8,8 +8,8 @@ package com.vertaperic.store.home;
 import android.support.annotation.NonNull;
 import android.view.MenuItem;
 
-import com.vertaperic.store.app.BasePresenter;
-import com.vertaperic.store.app.BaseView;
+import com.vertaperic.store.app.IPresenter;
+import com.vertaperic.store.app.IView;
 
 /**
  * This interface specifies the contract between the Home screen view and the presenter.
@@ -21,7 +21,7 @@ public interface HomeContract {
     /**
      * The view interface for Home screen functionality.
      */
-    interface View extends BaseView {
+    interface View extends IView {
 
         /**
          * To show product browsing screen.
@@ -52,7 +52,7 @@ public interface HomeContract {
     /**
      * The presenter interface for Home screen functionality.
      */
-    interface Presenter extends BasePresenter {
+    interface Presenter extends IPresenter {
 
         /**
          * Called when the toolbar navigation icon is clicked.

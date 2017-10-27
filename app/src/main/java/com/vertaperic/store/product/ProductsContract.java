@@ -7,8 +7,8 @@ package com.vertaperic.store.product;
 
 import android.support.annotation.NonNull;
 
-import com.vertaperic.store.app.BasePresenter;
-import com.vertaperic.store.app.BaseView;
+import com.vertaperic.store.app.IPresenter;
+import com.vertaperic.store.app.IView;
 import com.vertaperic.store.category.Category;
 
 import java.util.List;
@@ -23,7 +23,7 @@ public interface ProductsContract {
     /**
      * The view interface for Products screen functionality.
      */
-    interface View extends BaseView {
+    interface View extends IView {
 
         /**
          * To set the visibility of loading indicator.
@@ -62,7 +62,7 @@ public interface ProductsContract {
     /**
      * The presenter interface for Products screen functionality.
      */
-    interface Presenter extends BasePresenter {
+    interface Presenter extends IPresenter {
 
         /**
          * To load products for given category.

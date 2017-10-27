@@ -7,8 +7,8 @@ package com.vertaperic.store.cart;
 
 import android.support.annotation.NonNull;
 
-import com.vertaperic.store.app.BasePresenter;
-import com.vertaperic.store.app.BaseView;
+import com.vertaperic.store.app.IPresenter;
+import com.vertaperic.store.app.IView;
 
 /**
  * This interface specifies the contract between the My Cart screen view and the presenter.
@@ -20,7 +20,7 @@ public interface MyCartContract {
     /**
      * The view interface for My Cart screen functionality.
      */
-    interface View extends BaseView {
+    interface View extends IView {
 
         /**
          * To set the visibility of loading indicator.
@@ -85,7 +85,7 @@ public interface MyCartContract {
     /**
      * The presenter interface for My Cart screen functionality.
      */
-    interface Presenter extends BasePresenter {
+    interface Presenter extends IPresenter {
 
         /**
          * Called when the toolbar navigation icon is clicked.

@@ -8,8 +8,8 @@ package com.vertaperic.store.category;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.vertaperic.store.app.BasePresenter;
-import com.vertaperic.store.app.BaseView;
+import com.vertaperic.store.app.IPresenter;
+import com.vertaperic.store.app.IView;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public interface CategoriesContract {
     /**
      * The view interface for Categories screen functionality.
      */
-    interface View extends BaseView {
+    interface View extends IView {
 
         /**
          * To set the visibility of loading indicator.
@@ -69,7 +69,7 @@ public interface CategoriesContract {
     /**
      * The presenter interface for Categories screen functionality.
      */
-    interface Presenter extends BasePresenter {
+    interface Presenter extends IPresenter {
 
         /**
          * To load categories.

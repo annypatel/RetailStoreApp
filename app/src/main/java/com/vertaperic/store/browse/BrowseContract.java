@@ -8,8 +8,8 @@ package com.vertaperic.store.browse;
 import android.support.annotation.NonNull;
 import android.view.MenuItem;
 
-import com.vertaperic.store.app.BasePresenter;
-import com.vertaperic.store.app.BaseView;
+import com.vertaperic.store.app.IPresenter;
+import com.vertaperic.store.app.IView;
 
 /**
  * This interface specifies the contract between the Browse screen view and the presenter.
@@ -21,7 +21,7 @@ public interface BrowseContract {
     /**
      * The view interface for Browse screen functionality.
      */
-    interface View extends BaseView {
+    interface View extends IView {
 
         /**
          * To show the navigation view.
@@ -37,7 +37,7 @@ public interface BrowseContract {
     /**
      * The presenter interface for Browse screen functionality.
      */
-    interface Presenter extends BasePresenter {
+    interface Presenter extends IPresenter {
 
         /**
          * Called when the toolbar navigation icon is clicked.
