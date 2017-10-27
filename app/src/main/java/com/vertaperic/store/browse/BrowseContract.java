@@ -5,6 +5,9 @@
  */
 package com.vertaperic.store.browse;
 
+import android.support.annotation.NonNull;
+import android.view.MenuItem;
+
 import com.vertaperic.store.app.BasePresenter;
 import com.vertaperic.store.app.BaseView;
 
@@ -36,5 +39,17 @@ public interface BrowseContract {
      */
     interface Presenter extends BasePresenter {
 
+        /**
+         * Called when the toolbar navigation icon is clicked.
+         */
+        void onToolbarNavigationClick();
+
+        /**
+         * Called when toolbar menu item is clicked.
+         *
+         * @param item The item that was clicked.
+         * @return true if the event was handled, false otherwise.
+         */
+        boolean onMenuItemClick(@NonNull MenuItem item);
     }
 }

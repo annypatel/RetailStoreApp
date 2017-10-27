@@ -14,17 +14,4 @@ import android.view.MenuItem;
  * @author Anny Patel
  */
 public interface BasePresenter {
-
-    /**
-     * Called when the toolbar navigation icon is clicked.
-     */
-    void onToolbarNavigationClick();
-
-    /**
-     * Called when toolbar menu item is clicked.
-     *
-     * @param item The item that was clicked.
-     * @return true if the event was handled, false otherwise.
-     */
-    boolean onMenuItemClick(@NonNull MenuItem item);
 }

@@ -43,17 +43,6 @@ class CategoriesPresenter implements CategoriesContract.Presenter {
     }
 
     @Override
-    public void onToolbarNavigationClick() {
-        // do nothing
-    }
-
-    @Override
-    public boolean onMenuItemClick(@NonNull MenuItem item) {
-        // do nothing
-        return false;
-    }
-
-    @Override
     public void loadCategories(@Nullable Category mainCategory) {
         this.categoriesView.setLoadingIndicator(true);
 

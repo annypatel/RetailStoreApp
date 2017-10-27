@@ -44,17 +44,6 @@ class ProductsPresenter implements ProductsContract.Presenter {
     }
 
     @Override
-    public void onToolbarNavigationClick() {
-        // do nothing
-    }
-
-    @Override
-    public boolean onMenuItemClick(@NonNull MenuItem item) {
-        // do nothing
-        return false;
-    }
-
-    @Override
     public void loadProducts(@NonNull Category category) {
         this.productsView.setLoadingIndicator(true);
 

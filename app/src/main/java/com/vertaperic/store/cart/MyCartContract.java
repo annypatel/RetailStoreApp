@@ -88,6 +88,11 @@ public interface MyCartContract {
     interface Presenter extends BasePresenter {
 
         /**
+         * Called when the toolbar navigation icon is clicked.
+         */
+        void onToolbarNavigationClick();
+
+        /**
          * To load the products added in cart.
          */
         void loadCartProductItems();

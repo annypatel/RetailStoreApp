@@ -6,7 +6,6 @@
 package com.vertaperic.store.cart;
 
 import android.support.annotation.NonNull;
-import android.view.MenuItem;
 
 import java.util.List;
 
@@ -39,17 +38,11 @@ class MyCartPresenter implements MyCartContract.Presenter {
     MyCartPresenter(@NonNull MyCartContract.View myCartView, @NonNull CartRepository repository) {
         this.myCartView = myCartView;
         this.repository = repository;
-   }
+    }
 
     @Override
     public void onToolbarNavigationClick() {
         this.myCartView.handleBackPress();
-    }
-
-    @Override
-    public boolean onMenuItemClick(@NonNull MenuItem item) {
-        // do nothing
-        return false;
     }
 
     @Override
