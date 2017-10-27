@@ -14,10 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.vertaperic.store.R;
-import com.vertaperic.store.app.NavigationDrawerFragment;
 import com.vertaperic.store.cart.MyCartActivity;
-
-import javax.inject.Inject;
+import com.vertaperic.store.mvp.BaseFragment;
 
 /**
  * The fragment for product search functionality. This fragment is only for demo purpose, no search
@@ -25,13 +23,8 @@ import javax.inject.Inject;
  *
  * @author Anny Patel
  */
-public class SearchFragment extends NavigationDrawerFragment implements SearchContract.View {
-
-    /**
-     * The presenter attached with this view.
-     */
-    @Inject
-    SearchContract.Presenter presenter;
+public class SearchFragment extends BaseFragment<SearchContract.Presenter>
+        implements SearchContract.View {
 
     /**
      * Constructs new SearchFragment.
@@ -54,7 +47,7 @@ public class SearchFragment extends NavigationDrawerFragment implements SearchCo
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         SearchFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false);
         binding.toolbar.inflateMenu(R.menu.menu_my_cart);
-        binding.setPresenter(this.presenter);
+        binding.setPresenter(presenter());
 
         return binding.getRoot();
     }

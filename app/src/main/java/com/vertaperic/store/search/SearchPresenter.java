@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.view.MenuItem;
 
 import com.vertaperic.store.R;
+import com.vertaperic.store.mvp.BasePresenter;
 
 import javax.inject.Inject;
 
@@ -18,30 +19,22 @@ import javax.inject.Inject;
  *
  * @author Anny Patel
  */
-class SearchPresenter implements SearchContract.Presenter {
+class SearchPresenter extends BasePresenter<SearchContract.View>
+        implements SearchContract.Presenter {
 
-    /**
-     * The view attached with this presenter.
-     */
-    private SearchContract.View searchView;
-
-    /**
-     * @param searchView The view attached with this presenter.
-     */
     @Inject
-    SearchPresenter(@NonNull SearchContract.View searchView) {
-        this.searchView = searchView;
+    SearchPresenter() {
     }
 
     @Override
     public void onToolbarNavigationClick() {
-        this.searchView.showNavigationView();
+        view().showNavigationView();
     }
 
     @Override
     public boolean onMenuItemClick(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.itemMyCart) {
-            this.searchView.showMyCartScreen();
+            view().showMyCartScreen();
             return true;
         }
         return false;

@@ -16,23 +16,6 @@ import dagger.Provides;
 @Module
 class SearchModule {
 
-    /**
-     * The view for search screen.
-     */
-    private final SearchContract.View view;
-
-    /**
-     * @param view The view for search screen.
-     */
-    SearchModule(SearchContract.View view) {
-        this.view = view;
-    }
-
-    @Provides
-    SearchContract.View provideSearchView() {
-        return view;
-    }
-
     @Provides
     SearchContract.Presenter provideSearchPresenter(SearchPresenter presenter) {
         return presenter;
