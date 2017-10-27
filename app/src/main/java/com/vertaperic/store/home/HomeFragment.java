@@ -15,9 +15,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.vertaperic.store.R;
-import com.vertaperic.store.app.NavigationDrawerFragment;
 import com.vertaperic.store.browse.BrowseActivity;
 import com.vertaperic.store.cart.MyCartActivity;
+import com.vertaperic.store.mvp.BaseFragment;
 
 import javax.inject.Inject;
 
@@ -30,13 +30,9 @@ import javax.inject.Inject;
  *
  * @author Anny Patel
  */
-public class HomeFragment extends NavigationDrawerFragment implements HomeContract.View {
+public class HomeFragment extends BaseFragment<HomeContract.Presenter>
+        implements HomeContract.View {
 
-    /**
-     * The presenter attached with this view.
-     */
-    @Inject
-    HomeContract.Presenter presenter;
     /**
      * The binding instance for this fragment.
      */
@@ -63,7 +59,7 @@ public class HomeFragment extends NavigationDrawerFragment implements HomeContra
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false);
         this.binding.toolbar.inflateMenu(R.menu.menu_my_cart);
-        this.binding.setPresenter(this.presenter);
+        this.binding.setPresenter(presenter());
 
         return this.binding.getRoot();
     }

@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.view.MenuItem;
 
 import com.vertaperic.store.R;
+import com.vertaperic.store.mvp.BasePresenter;
 
 import javax.inject.Inject;
 
@@ -18,30 +19,22 @@ import javax.inject.Inject;
  *
  * @author Anny Patel
  */
-class HomePresenter implements HomeContract.Presenter {
+class HomePresenter extends BasePresenter<HomeContract.View>
+        implements HomeContract.Presenter {
 
-    /**
-     * The view attached with this presenter.
-     */
-    private HomeContract.View homeView;
-
-    /**
-     * @param homeView The view attached with this presenter.
-     */
     @Inject
-    HomePresenter(@NonNull HomeContract.View homeView) {
-        this.homeView = homeView;
+    HomePresenter() {
     }
 
     @Override
     public void onToolbarNavigationClick() {
-        this.homeView.showNavigationView();
+        view().showNavigationView();
     }
 
     @Override
     public boolean onMenuItemClick(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.itemMyCart) {
-            this.homeView.showMyCartScreen();
+            view().showMyCartScreen();
             return true;
         }
         return false;
@@ -49,16 +42,16 @@ class HomePresenter implements HomeContract.Presenter {
 
     @Override
     public void browseProducts() {
-        this.homeView.showBrowseScreen();
+        view().showBrowseScreen();
     }
 
     @Override
     public void createGiftCard() {
-        this.homeView.showGiftCardsScreen();
+        view().showGiftCardsScreen();
     }
 
     @Override
     public void createWishList() {
-        this.homeView.showWishListsScreen();
+        view().showWishListsScreen();
     }
 }

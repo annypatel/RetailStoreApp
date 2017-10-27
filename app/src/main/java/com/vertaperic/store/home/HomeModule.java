@@ -16,23 +16,6 @@ import dagger.Provides;
 @Module
 class HomeModule {
 
-    /**
-     * The view for home screen.
-     */
-    private final HomeContract.View view;
-
-    /**
-     * @param view The view for home screen.
-     */
-    HomeModule(HomeContract.View view) {
-        this.view = view;
-    }
-
-    @Provides
-    HomeContract.View provideHomeView() {
-        return view;
-    }
-
     @Provides
     HomeContract.Presenter provideHomePresenter(HomePresenter presenter) {
         return presenter;

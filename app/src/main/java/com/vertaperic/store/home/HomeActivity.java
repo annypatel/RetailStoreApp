@@ -41,7 +41,7 @@ public class HomeActivity extends NavigationDrawerActivity {
 
         // inject dependencies with dagger
         DaggerHomeComponent.builder()
-                .homeModule(new HomeModule(fragment))
+                .homeModule(new HomeModule())
                 .build()
                 .inject(fragment);
     }
