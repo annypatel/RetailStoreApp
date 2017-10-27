@@ -110,7 +110,7 @@ class CartProductItemsAdapter extends RecyclerView.Adapter<CartProductItemsAdapt
          */
         public void bind(CartProductItem cartProductItem, MyCartContract.Presenter presenter) {
             this.binding.setCartProductItem(cartProductItem);
-            this.binding.setActionHandler(presenter);
+            this.binding.setPresenter(presenter);
             this.binding.executePendingBindings();
         }
     }

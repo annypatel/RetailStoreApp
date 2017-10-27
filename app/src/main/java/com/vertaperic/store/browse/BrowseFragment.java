@@ -63,7 +63,7 @@ public class BrowseFragment extends NavigationDrawerFragment implements BrowseCo
     public View onCreateView(LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         BrowseFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_browse, container, false);
         binding.toolbar.inflateMenu(R.menu.menu_my_cart);
-        binding.setActionHandler(this.presenter);
+        binding.setPresenter(this.presenter);
 
         // apply fragment animation
         FragmentController fragmentController = getChildFragmentController();

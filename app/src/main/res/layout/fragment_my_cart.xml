@@ -11,7 +11,7 @@
             type="com.vertaperic.store.cart.CartProductItems" />
 
         <variable
-            name="actionHandler"
+            name="presenter"
             type="com.vertaperic.store.cart.MyCartContract.Presenter" />
     </data>
 
@@ -32,7 +32,7 @@
                 android:layout_height="?attr/actionBarSize"
                 app:layout_scrollFlags="scroll|snap|enterAlways"
                 app:navigationIcon="@drawable/ic_toolbar_navigation_back"
-                app:navigationOnClickListener="@{actionHandler}"
+                app:navigationOnClickListener="@{() -> presenter.onToolbarNavigationClick()}"
                 app:title="@string/my_cart_screen_title" />
 
             <TextView

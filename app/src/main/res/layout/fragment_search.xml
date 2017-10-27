@@ -5,7 +5,7 @@
     <data class=".search.SearchFragmentBinding">
 
         <variable
-            name="actionHandler"
+            name="presenter"
             type="com.vertaperic.store.search.SearchContract.Presenter" />
     </data>
 
@@ -23,9 +23,9 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:menuItemClickListener="@{actionHandler}"
                 app:navigationIcon="@drawable/ic_toolbar_navigation_drawer"
-                app:navigationOnClickListener="@{actionHandler}"
+                app:navigationOnClickListener="@{() -> presenter.onToolbarNavigationClick()}"
+                app:onMenuItemClickListener="@{(menu) -> presenter.onMenuItemClick(menu)}"
                 app:title="@string/search_screen_title" />
 
         </android.support.design.widget.AppBarLayout>

@@ -10,7 +10,7 @@
             type="com.vertaperic.store.product.Product" />
 
         <variable
-            name="actionHandler"
+            name="presenter"
             type="com.vertaperic.store.product.ProductsContract.Presenter" />
 
     </data>
@@ -19,7 +19,7 @@
         style="@style/Widget.App.CardView.Product"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{() -> actionHandler.selectProduct(product)}">
+        android:onClick="@{() -> presenter.selectProduct(product)}">
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -24,7 +24,7 @@ public interface ProductsRepository {
      * @param category The category.
      * @param callback The lading callback.
      */
-    void getProducts(@NonNull Category category,@NonNull LoadProductsCallback callback);
+    void getProducts(@NonNull Category category, @NonNull LoadProductsCallback callback);
 
     /**
      * The callback for loading products.

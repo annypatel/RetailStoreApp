@@ -89,7 +89,7 @@ public class ProductDetailsFragment extends SupportFragment implements ProductDe
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.binding = DataBindingUtil.inflate(inflater, R.layout.fragment_product_details, container, false);
-        this.binding.setActionHandler(this.presenter);
+        this.binding.setPresenter(this.presenter);
 
         // get product and cart item from arguments
         Product product = getProductFromArguments();

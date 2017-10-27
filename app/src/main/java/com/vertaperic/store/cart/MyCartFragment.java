@@ -67,7 +67,7 @@ public class MyCartFragment extends SupportFragment implements MyCartContract.Vi
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.binding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_cart, container, false);
-        this.binding.setActionHandler(this.presenter);
+        this.binding.setPresenter(this.presenter);
 
         // configure RecyclerView
         this.binding.listProducts.setHasFixedSize(true);

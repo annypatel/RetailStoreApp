@@ -111,7 +111,7 @@ class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.ViewHolde
          */
         public void bind(Category category, CategoriesContract.Presenter presenter) {
             this.binding.setCategory(category);
-            this.binding.setActionHandler(presenter);
+            this.binding.setPresenter(presenter);
             this.binding.executePendingBindings();
         }
     }

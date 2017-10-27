@@ -54,7 +54,7 @@ public class SearchFragment extends NavigationDrawerFragment implements SearchCo
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         SearchFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false);
         binding.toolbar.inflateMenu(R.menu.menu_my_cart);
-        binding.setActionHandler(this.presenter);
+        binding.setPresenter(this.presenter);
 
         return binding.getRoot();
     }

@@ -12,7 +12,7 @@
             type="com.vertaperic.store.category.Category" />
 
         <variable
-            name="actionHandler"
+            name="presenter"
             type="com.vertaperic.store.category.CategoriesContract.Presenter" />
 
     </data>
@@ -21,7 +21,7 @@
         style="@style/Widget.App.CardView.Category"
         android:layout_width="match_parent"
         android:layout_height="@dimen/category_card_height"
-        android:onClick="@{() -> actionHandler.selectCategory(category)}">
+        android:onClick="@{() -> presenter.selectCategory(category)}">
 
         <ImageView
             android:layout_width="match_parent"

@@ -16,7 +16,7 @@
             type="com.vertaperic.store.cart.CartItem" />
 
         <variable
-            name="actionHandler"
+            name="presenter"
             type="com.vertaperic.store.product.detail.ProductDetailsContract.Presenter" />
     </data>
 
@@ -63,9 +63,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin"
-                    app:menuItemClickListener="@{actionHandler}"
                     app:navigationIcon="@drawable/ic_toolbar_navigation_back"
-                    app:navigationOnClickListener="@{actionHandler}" />
+                    app:navigationOnClickListener="@{() -> presenter.onToolbarNavigationClick()}"
+                    app:onMenuItemClickListener="@{(menu) -> presenter.onMenuItemClick(menu)}" />
 
             </android.support.design.widget.CollapsingToolbarLayout>
         </android.support.design.widget.AppBarLayout>
@@ -204,7 +204,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/layout_outer_padding"
             android:layout_marginRight="@dimen/layout_outer_padding"
-            android:onClick="@{() -> actionHandler.addProductToCart(product)}"
+            android:onClick="@{() -> presenter.addProductToCart(product)}"
             android:src="@drawable/ic_add_product_to_cart"
             android:visibility="@{product == null || cartItem != null ? View.GONE : View.VISIBLE}"
             app:layout_anchor="@id/appbarLayout"

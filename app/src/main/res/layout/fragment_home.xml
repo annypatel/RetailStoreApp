@@ -6,7 +6,7 @@
     <data class=".home.HomeFragmentBinding">
 
         <variable
-            name="actionHandler"
+            name="presenter"
             type="com.vertaperic.store.home.HomeContract.Presenter" />
     </data>
 
@@ -44,9 +44,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin"
-                    app:menuItemClickListener="@{actionHandler}"
                     app:navigationIcon="@drawable/ic_toolbar_navigation_drawer"
-                    app:navigationOnClickListener="@{actionHandler}"
+                    app:navigationOnClickListener="@{() -> presenter.onToolbarNavigationClick()}"
+                    app:onMenuItemClickListener="@{(menu) -> presenter.onMenuItemClick(menu)}"
                     app:title="@string/application_name" />
 
             </android.support.design.widget.CollapsingToolbarLayout>
@@ -71,7 +71,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/widget_inner_margin_medium"
-                    android:onClick="@{() -> actionHandler.browseProducts()}"
+                    android:onClick="@{() -> presenter.browseProducts()}"
                     app:cardBackgroundColor="@color/card_background_color_1">
 
                     <LinearLayout
@@ -100,7 +100,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/widget_inner_margin_medium"
-                    android:onClick="@{() -> actionHandler.createGiftCard()}"
+                    android:onClick="@{() -> presenter.createGiftCard()}"
                     app:cardBackgroundColor="@color/card_background_color_2">
 
                     <LinearLayout
@@ -128,7 +128,7 @@
                     style="@style/Widget.App.CardView.Home"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:onClick="@{() -> actionHandler.createWishList()}"
+                    android:onClick="@{() -> presenter.createWishList()}"
                     app:cardBackgroundColor="@color/card_background_color_3">
 
                     <LinearLayout

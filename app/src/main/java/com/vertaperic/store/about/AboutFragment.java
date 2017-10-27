@@ -53,7 +53,7 @@ public class AboutFragment extends NavigationDrawerFragment implements AboutCont
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         AboutFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_about, container, false);
         binding.toolbar.inflateMenu(R.menu.menu_my_cart);
-        binding.setActionHandler(this.presenter);
+        binding.setPresenter(this.presenter);
 
         return binding.getRoot();
     }

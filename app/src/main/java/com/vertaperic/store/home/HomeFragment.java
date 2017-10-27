@@ -63,7 +63,7 @@ public class HomeFragment extends NavigationDrawerFragment implements HomeContra
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false);
         this.binding.toolbar.inflateMenu(R.menu.menu_my_cart);
-        this.binding.setActionHandler(this.presenter);
+        this.binding.setPresenter(this.presenter);
 
         return this.binding.getRoot();
     }

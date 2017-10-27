@@ -10,7 +10,7 @@
             type="com.vertaperic.store.cart.CartProductItem" />
 
         <variable
-            name="actionHandler"
+            name="presenter"
             type="com.vertaperic.store.cart.MyCartContract.Presenter" />
     </data>
 
@@ -18,7 +18,7 @@
         style="@style/Widget.App.CardView.Product"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{() -> actionHandler.selectCartProductItem(cartProductItem)}">
+        android:onClick="@{() -> presenter.selectCartProductItem(cartProductItem)}">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -78,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:onClick="@{() -> actionHandler.confirmProductRemoval(cartProductItem)}"
+            android:onClick="@{() -> presenter.confirmProductRemoval(cartProductItem)}"
             android:padding="@dimen/widget_inner_padding_medium"
             android:src="@drawable/ic_remove_product_from_cart"
             tools:ignore="ContentDescription" />

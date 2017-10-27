@@ -110,7 +110,7 @@ class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHolder> {
          */
         public void bind(Product product, ProductsContract.Presenter presenter) {
             this.binding.setProduct(product);
-            this.binding.setActionHandler(presenter);
+            this.binding.setPresenter(presenter);
             this.binding.executePendingBindings();
         }
     }
