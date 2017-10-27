@@ -8,8 +8,9 @@ package com.vertaperic.store.about;
 import android.support.annotation.NonNull;
 import android.view.MenuItem;
 
-import com.vertaperic.store.app.IPresenter;
-import com.vertaperic.store.app.IView;
+import com.vertaperic.store.mvp.IPresenter;
+import com.vertaperic.store.mvp.IView;
+
 
 /**
  * This interface specifies the contract between the About screen view and the presenter.

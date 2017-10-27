@@ -14,23 +14,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.vertaperic.store.R;
-import com.vertaperic.store.app.NavigationDrawerFragment;
 import com.vertaperic.store.cart.MyCartActivity;
-
-import javax.inject.Inject;
+import com.vertaperic.store.mvp.BaseFragment;
 
 /**
  * The fragment for displaying the information about the app and the company.
  *
  * @author Anny Patel
  */
-public class AboutFragment extends NavigationDrawerFragment implements AboutContract.View {
-
-    /**
-     * The presenter attached with this view.
-     */
-    @Inject
-    AboutContract.Presenter presenter;
+public class AboutFragment extends BaseFragment<AboutContract.Presenter>
+        implements AboutContract.View {
 
     /**
      * Constructs new AboutFragment.
@@ -53,7 +46,7 @@ public class AboutFragment extends NavigationDrawerFragment implements AboutCont
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         AboutFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_about, container, false);
         binding.toolbar.inflateMenu(R.menu.menu_my_cart);
-        binding.setPresenter(this.presenter);
+        binding.setPresenter(presenter());
 
         return binding.getRoot();
     }

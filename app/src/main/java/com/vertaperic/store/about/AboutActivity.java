@@ -37,7 +37,7 @@ public class AboutActivity extends NavigationDrawerActivity {
 
         // inject dependencies with dagger
         DaggerAboutComponent.builder()
-                .aboutModule(new AboutModule(fragment))
+                .aboutModule(new AboutModule())
                 .build()
                 .inject(fragment);
     }
