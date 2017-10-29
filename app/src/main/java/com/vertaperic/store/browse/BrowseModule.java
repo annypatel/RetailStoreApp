@@ -16,23 +16,6 @@ import dagger.Provides;
 @Module
 class BrowseModule {
 
-    /**
-     * The view for browse screen.
-     */
-    private final BrowseContract.View view;
-
-    /**
-     * @param view The view for browse screen.
-     */
-    BrowseModule(BrowseContract.View view) {
-        this.view = view;
-    }
-
-    @Provides
-    BrowseContract.View provideBrowseView() {
-        return view;
-    }
-
     @Provides
     BrowseContract.Presenter provideBrowsePresenter(BrowsePresenter presenter) {
         return presenter;

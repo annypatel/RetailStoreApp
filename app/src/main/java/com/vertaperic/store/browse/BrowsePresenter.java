@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.view.MenuItem;
 
 import com.vertaperic.store.R;
+import com.vertaperic.store.mvp.BasePresenter;
 
 import javax.inject.Inject;
 
@@ -18,30 +19,22 @@ import javax.inject.Inject;
  *
  * @author Anny Patel
  */
-class BrowsePresenter implements BrowseContract.Presenter {
+class BrowsePresenter extends BasePresenter<BrowseContract.View>
+        implements BrowseContract.Presenter {
 
-    /**
-     * The view attached with this presenter.
-     */
-    private BrowseContract.View browseView;
-
-    /**
-     * @param browseView The view attached with this presenter.
-     */
     @Inject
-    BrowsePresenter(@NonNull BrowseContract.View browseView) {
-        this.browseView = browseView;
+    BrowsePresenter() {
     }
 
     @Override
     public void onToolbarNavigationClick() {
-        this.browseView.showNavigationView();
+        view().showNavigationView();
     }
 
     @Override
     public boolean onMenuItemClick(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.itemMyCart) {
-            this.browseView.showMyCartScreen();
+            view().showMyCartScreen();
             return true;
         }
         return false;

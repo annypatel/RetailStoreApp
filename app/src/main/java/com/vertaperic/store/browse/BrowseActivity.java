@@ -37,7 +37,7 @@ public class BrowseActivity extends NavigationDrawerActivity {
 
         // inject dependencies with dagger
         DaggerBrowseComponent.builder()
-                .browseModule(new BrowseModule(fragment))
+                .browseModule(new BrowseModule())
                 .build()
                 .inject(fragment);
     }

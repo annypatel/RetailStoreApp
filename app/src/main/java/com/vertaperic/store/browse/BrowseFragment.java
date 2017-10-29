@@ -19,24 +19,18 @@ import com.vertaperic.android.support.FragmentAnimation;
 import com.vertaperic.android.support.FragmentController;
 import com.vertaperic.android.support.SupportFactory;
 import com.vertaperic.store.R;
-import com.vertaperic.store.app.NavigationDrawerFragment;
 import com.vertaperic.store.cart.MyCartActivity;
 import com.vertaperic.store.category.CategoriesFragment;
-
-import javax.inject.Inject;
+import com.vertaperic.store.mvp.BaseFragment;
 
 /**
  * The fragment for category wise product browsing functionality.
  *
  * @author Anny Patel
  */
-public class BrowseFragment extends NavigationDrawerFragment implements BrowseContract.View {
+public class BrowseFragment extends BaseFragment<BrowseContract.Presenter>
+        implements BrowseContract.View {
 
-    /**
-     * The presenter attached with this view.
-     */
-    @Inject
-    BrowseContract.Presenter presenter;
     /**
      * The breadcrumb view controller.
      */
@@ -63,7 +57,7 @@ public class BrowseFragment extends NavigationDrawerFragment implements BrowseCo
     public View onCreateView(LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         BrowseFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_browse, container, false);
         binding.toolbar.inflateMenu(R.menu.menu_my_cart);
-        binding.setPresenter(this.presenter);
+        binding.setPresenter(presenter());
 
         // apply fragment animation
         FragmentController fragmentController = getChildFragmentController();
