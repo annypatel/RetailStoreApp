@@ -9,9 +9,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.MenuItem;
 
-import com.vertaperic.store.app.IPresenter;
-import com.vertaperic.store.app.IView;
 import com.vertaperic.store.cart.CartItem;
+import com.vertaperic.store.mvp.IPresenter;
+import com.vertaperic.store.mvp.IView;
 import com.vertaperic.store.product.Product;
 
 /**
@@ -65,13 +65,6 @@ public interface ProductDetailsContract {
          * To show my cart screen.
          */
         void showMyCartScreen();
-
-        /**
-         * To check if view is active or not.
-         *
-         * @return true if view is still active, otherwise false.
-         */
-        boolean isActive();
     }
 
     /**

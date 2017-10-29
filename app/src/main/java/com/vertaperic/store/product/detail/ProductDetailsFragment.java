@@ -16,13 +16,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.vertaperic.android.support.SupportFragment;
 import com.vertaperic.store.R;
 import com.vertaperic.store.cart.CartItem;
 import com.vertaperic.store.cart.MyCartActivity;
+import com.vertaperic.store.mvp.BaseFragment;
 import com.vertaperic.store.product.Product;
-
-import javax.inject.Inject;
 
 /**
  * ProductDetailsFragment will displays the product details for the supplied product. Pass product
@@ -37,7 +35,8 @@ import javax.inject.Inject;
  *
  * @author Anny Patel
  */
-public class ProductDetailsFragment extends SupportFragment implements ProductDetailsContract.View {
+public class ProductDetailsFragment extends BaseFragment<ProductDetailsContract.Presenter>
+        implements ProductDetailsContract.View {
 
     /**
      * The extra name for product to pass to ProductDetailsFragment. To display product details its
@@ -51,11 +50,6 @@ public class ProductDetailsFragment extends SupportFragment implements ProductDe
      */
     private static final String EXTRA_CART_ITEM = "com.vertaperic.store.CartItem";
 
-    /**
-     * The presenter attached with this view.
-     */
-    @Inject
-    ProductDetailsContract.Presenter presenter;
     /**
      * The binding instance for this fragment.
      */
@@ -89,7 +83,7 @@ public class ProductDetailsFragment extends SupportFragment implements ProductDe
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.binding = DataBindingUtil.inflate(inflater, R.layout.fragment_product_details, container, false);
-        this.binding.setPresenter(this.presenter);
+        this.binding.setPresenter(presenter());
 
         // get product and cart item from arguments
         Product product = getProductFromArguments();
@@ -102,7 +96,7 @@ public class ProductDetailsFragment extends SupportFragment implements ProductDe
         }
 
         // get product details
-        this.presenter.loadProductDetails(product, cartItem);
+        presenter().loadProductDetails(product, cartItem);
 
         return this.binding.getRoot();
     }
@@ -143,11 +137,6 @@ public class ProductDetailsFragment extends SupportFragment implements ProductDe
     @Override
     public void showMyCartScreen() {
         startActivity(new Intent(getContext(), MyCartActivity.class));
-    }
-
-    @Override
-    public boolean isActive() {
-        return isAdded();
     }
 
     /**

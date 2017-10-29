@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import com.vertaperic.store.R;
 import com.vertaperic.store.cart.CartItem;
 import com.vertaperic.store.cart.CartRepository;
+import com.vertaperic.store.mvp.BasePresenter;
 import com.vertaperic.store.product.Product;
 
 import javax.inject.Inject;
@@ -22,12 +23,9 @@ import javax.inject.Inject;
  *
  * @author Anny Patel
  */
-class ProductDetailsPresenter implements ProductDetailsContract.Presenter {
+class ProductDetailsPresenter extends BasePresenter<ProductDetailsContract.View>
+        implements ProductDetailsContract.Presenter {
 
-    /**
-     * The view attached with this presenter.
-     */
-    private ProductDetailsContract.View detailsView;
     /**
      * The repository for adding the product to cart.
      */
@@ -36,24 +34,22 @@ class ProductDetailsPresenter implements ProductDetailsContract.Presenter {
     /**
      * Constructs new ProductDetailsPresenter.
      *
-     * @param detailsView    The view to attach with this presenter.
      * @param cartRepository The repository for adding product to cart.
      */
     @Inject
-    ProductDetailsPresenter(@NonNull ProductDetailsContract.View detailsView, @NonNull CartRepository cartRepository) {
-        this.detailsView = detailsView;
+    ProductDetailsPresenter(@NonNull CartRepository cartRepository) {
         this.cartRepository = cartRepository;
     }
 
     @Override
     public void onToolbarNavigationClick() {
-        this.detailsView.closeDetailsScreen();
+        view().closeDetailsScreen();
     }
 
     @Override
     public boolean onMenuItemClick(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.itemMyCart) {
-            this.detailsView.showMyCartScreen();
+            view().showMyCartScreen();
             return true;
         }
         return false;
@@ -63,28 +59,28 @@ class ProductDetailsPresenter implements ProductDetailsContract.Presenter {
     public void loadProductDetails(@NonNull Product product, @Nullable CartItem cartItem) {
         // if cart item is already available then show it
         if (cartItem != null) {
-            this.detailsView.showProductDetails(product, cartItem);
+            view().showProductDetails(product, cartItem);
             return;
         }
 
         // else get cart item from repository
-        this.detailsView.setLoadingIndicator(true);
+        view().setLoadingIndicator(true);
         // create the callback
         CartRepository.GetCartItemCallback callback = new CartRepository.GetCartItemCallback() {
 
             @Override
             public void onCartItemFound(@NonNull Product product, @NonNull CartItem cartItem) {
-                if (detailsView.isActive()) {
-                    detailsView.setLoadingIndicator(false);
-                    detailsView.showProductDetails(product, cartItem);
+                if (isAttached()) {
+                    view().setLoadingIndicator(false);
+                    view().showProductDetails(product, cartItem);
                 }
             }
 
             @Override
             public void onCartItemNotFound(@NonNull Product product) {
-                if (detailsView.isActive()) {
-                    detailsView.setLoadingIndicator(false);
-                    detailsView.showProductDetails(product, null);
+                if (isAttached()) {
+                    view().setLoadingIndicator(false);
+                    view().showProductDetails(product, null);
                 }
             }
         };
@@ -100,15 +96,15 @@ class ProductDetailsPresenter implements ProductDetailsContract.Presenter {
 
             @Override
             public void onProductAddedToCart(@NonNull Product product, @NonNull CartItem cartItem) {
-                if (detailsView.isActive()) {
-                    detailsView.showProductAddedToCart(product, cartItem);
+                if (isAttached()) {
+                    view().showProductAddedToCart(product, cartItem);
                 }
             }
 
             @Override
             public void onFailure(@NonNull Product product) {
-                if (detailsView.isActive()) {
-                    detailsView.showAddToCartFailure(product);
+                if (isAttached()) {
+                    view().showAddToCartFailure(product);
                 }
             }
         };

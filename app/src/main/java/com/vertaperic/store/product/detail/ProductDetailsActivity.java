@@ -57,7 +57,7 @@ public class ProductDetailsActivity extends SupportAppCompatActivity {
         // inject dependencies with dagger
         DaggerProductDetailsComponent.builder()
                 .appComponent(App.getAppComponent(this))
-                .productDetailsModule(new ProductDetailsModule(fragment))
+                .productDetailsModule(new ProductDetailsModule())
                 .build()
                 .inject(fragment);
     }

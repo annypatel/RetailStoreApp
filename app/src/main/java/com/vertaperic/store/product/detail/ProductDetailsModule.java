@@ -16,23 +16,6 @@ import dagger.Provides;
 @Module
 class ProductDetailsModule {
 
-    /**
-     * The view for product details screen.
-     */
-    private final ProductDetailsContract.View view;
-
-    /**
-     * @param view The view for product details screen.
-     */
-    ProductDetailsModule(ProductDetailsContract.View view) {
-        this.view = view;
-    }
-
-    @Provides
-    ProductDetailsContract.View provideProductDetailsView() {
-        return view;
-    }
-
     @Provides
     ProductDetailsContract.Presenter provideProductDetailsPresenter(ProductDetailsPresenter presenter) {
         return presenter;
