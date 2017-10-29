@@ -5,6 +5,7 @@
  */
 package com.vertaperic.store.product;
 
+import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -15,16 +16,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.vertaperic.android.support.SupportFragment;
 import com.vertaperic.store.R;
 import com.vertaperic.store.app.App;
 import com.vertaperic.store.category.Category;
+import com.vertaperic.store.mvp.BaseFragment;
 import com.vertaperic.store.product.detail.ProductDetailsActivity;
 import com.vertaperic.store.widget.ListMarginDecoration;
 
 import java.util.List;
-
-import javax.inject.Inject;
 
 /**
  * ProductFragment will displays the list of products by specified category. Pass category to this
@@ -35,7 +34,8 @@ import javax.inject.Inject;
  *
  * @author Anny Patel
  */
-public class ProductsFragment extends SupportFragment implements ProductsContract.View {
+public class ProductsFragment extends BaseFragment<ProductsContract.Presenter>
+        implements ProductsContract.View {
 
     /**
      * The extra name for category of products. To display products its mandatory to pass
@@ -43,11 +43,6 @@ public class ProductsFragment extends SupportFragment implements ProductsContrac
      */
     private static final String EXTRA_CATEGORY = "com.vertaperic.store.Category";
 
-    /**
-     * The presenter attached with this view.
-     */
-    @Inject
-    ProductsContract.Presenter presenter;
     /**
      * The binding instance for this view.
      */
@@ -80,15 +75,15 @@ public class ProductsFragment extends SupportFragment implements ProductsContrac
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
+    public void onAttach(Context context) {
         // inject dependencies with dagger
         DaggerProductsComponent.builder()
                 .appComponent(App.getAppComponent(getContext()))
-                .productsModule(new ProductsModule(this))
+                .productsModule(new ProductsModule())
                 .build()
                 .inject(this);
+
+        super.onAttach(context);
     }
 
     @Nullable
@@ -103,11 +98,11 @@ public class ProductsFragment extends SupportFragment implements ProductsContrac
         this.binding.listProducts.addItemDecoration(new ListMarginDecoration(margin));
 
         // create adapter and set it to recycle view
-        this.adapter = new ProductsAdapter(getContext(), this.presenter);
+        this.adapter = new ProductsAdapter(getContext(), presenter());
         this.binding.listProducts.setAdapter(this.adapter);
 
         // load products
-        this.presenter.loadProducts(getCategoryFromArguments());
+        presenter().loadProducts(getCategoryFromArguments());
 
         return this.binding.getRoot();
     }
@@ -137,11 +132,6 @@ public class ProductsFragment extends SupportFragment implements ProductsContrac
         Intent intent = new Intent(getContext(), ProductDetailsActivity.class);
         intent.putExtra(ProductDetailsActivity.EXTRA_PRODUCT, product);
         startActivity(intent);
-    }
-
-    @Override
-    public boolean isActive() {
-        return isAdded();
     }
 
     /**

@@ -7,8 +7,8 @@ package com.vertaperic.store.product;
 
 import android.support.annotation.NonNull;
 
-import com.vertaperic.store.app.IPresenter;
-import com.vertaperic.store.app.IView;
+import com.vertaperic.store.mvp.IPresenter;
+import com.vertaperic.store.mvp.IView;
 import com.vertaperic.store.category.Category;
 
 import java.util.List;
@@ -50,13 +50,6 @@ public interface ProductsContract {
          * @param product The product to display on detail screen.
          */
         void showProductDetailsScreen(@NonNull Product product);
-
-        /**
-         * To check if view is active or not.
-         *
-         * @return true if view is still active, otherwise false.
-         */
-        boolean isActive();
     }
 
     /**

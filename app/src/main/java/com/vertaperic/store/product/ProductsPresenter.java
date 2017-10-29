@@ -6,9 +6,9 @@
 package com.vertaperic.store.product;
 
 import android.support.annotation.NonNull;
-import android.view.MenuItem;
 
 import com.vertaperic.store.category.Category;
+import com.vertaperic.store.mvp.BasePresenter;
 
 import java.util.List;
 
@@ -20,12 +20,9 @@ import javax.inject.Inject;
  *
  * @author Anny Patel
  */
-class ProductsPresenter implements ProductsContract.Presenter {
+class ProductsPresenter extends BasePresenter<ProductsContract.View>
+        implements ProductsContract.Presenter {
 
-    /**
-     * The view attached with this presenter.
-     */
-    private ProductsContract.View productsView;
     /**
      * The repository for loading products.
      */
@@ -34,35 +31,33 @@ class ProductsPresenter implements ProductsContract.Presenter {
     /**
      * Constructs new ProductsPresenter.
      *
-     * @param productsView The view attached with this presenter.
-     * @param repository   The repository for loading products.
+     * @param repository The repository for loading products.
      */
     @Inject
-    ProductsPresenter(@NonNull ProductsContract.View productsView, @NonNull ProductsRepository repository) {
-        this.productsView = productsView;
+    ProductsPresenter(@NonNull ProductsRepository repository) {
         this.repository = repository;
     }
 
     @Override
     public void loadProducts(@NonNull Category category) {
-        this.productsView.setLoadingIndicator(true);
+        view().setLoadingIndicator(true);
 
         // create loading callback
         ProductsRepository.LoadProductsCallback callback = new ProductsRepository.LoadProductsCallback() {
 
             @Override
             public void onProductsLoaded(@NonNull List<Product> products) {
-                if (productsView.isActive()) {
-                    productsView.setLoadingIndicator(false);
-                    productsView.showProducts(products);
+                if (isAttached()) {
+                    view().setLoadingIndicator(false);
+                    view().showProducts(products);
                 }
             }
 
             @Override
             public void onDataNotAvailable() {
-                if (productsView.isActive()) {
-                    productsView.setLoadingIndicator(false);
-                    productsView.showProductsNotAvailable();
+                if (isAttached()) {
+                    view().setLoadingIndicator(false);
+                    view().showProductsNotAvailable();
                 }
             }
         };
@@ -73,6 +68,6 @@ class ProductsPresenter implements ProductsContract.Presenter {
 
     @Override
     public void selectProduct(@NonNull Product product) {
-        this.productsView.showProductDetailsScreen(product);
+        view().showProductDetailsScreen(product);
     }
 }
