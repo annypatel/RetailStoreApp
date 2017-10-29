@@ -7,6 +7,8 @@ package com.vertaperic.store.cart;
 
 import android.support.annotation.NonNull;
 
+import com.vertaperic.store.mvp.BasePresenter;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -17,12 +19,9 @@ import javax.inject.Inject;
  *
  * @author Anny Patel
  */
-class MyCartPresenter implements MyCartContract.Presenter {
+class MyCartPresenter extends BasePresenter<MyCartContract.View>
+        implements MyCartContract.Presenter {
 
-    /**
-     * The view attached with this presenter.
-     */
-    private MyCartContract.View myCartView;
     /**
      * The repository for accessing cart data.
      */
@@ -31,40 +30,38 @@ class MyCartPresenter implements MyCartContract.Presenter {
     /**
      * Constructs new MyCartPresenter.
      *
-     * @param myCartView The view attached with this presenter.
      * @param repository The repository for accessing cart data.
      */
     @Inject
-    MyCartPresenter(@NonNull MyCartContract.View myCartView, @NonNull CartRepository repository) {
-        this.myCartView = myCartView;
+    MyCartPresenter(@NonNull CartRepository repository) {
         this.repository = repository;
     }
 
     @Override
     public void onToolbarNavigationClick() {
-        this.myCartView.handleBackPress();
+        view().handleBackPress();
     }
 
     @Override
     public void loadCartProductItems() {
-        this.myCartView.setLoadingIndicator(true);
+        view().setLoadingIndicator(true);
 
         // create a callback
         CartRepository.GetCartProductItemsCallback callback = new CartRepository.GetCartProductItemsCallback() {
 
             @Override
             public void onCartProductItemsLoaded(@NonNull CartProductItems cartProductItems) {
-                if (myCartView.isActive()) {
-                    myCartView.setLoadingIndicator(false);
-                    myCartView.showCartProductItems(cartProductItems);
+                if (isAttached()) {
+                    view().setLoadingIndicator(false);
+                    view().showCartProductItems(cartProductItems);
                 }
             }
 
             @Override
             public void onDataNotAvailable() {
-                if (myCartView.isActive()) {
-                    myCartView.setLoadingIndicator(false);
-                    myCartView.showCartIsEmpty();
+                if (isAttached()) {
+                    view().setLoadingIndicator(false);
+                    view().showCartIsEmpty();
                 }
             }
         };
@@ -75,12 +72,12 @@ class MyCartPresenter implements MyCartContract.Presenter {
 
     @Override
     public void selectCartProductItem(@NonNull CartProductItem cartProductItem) {
-        this.myCartView.showProductDetailsScreen(cartProductItem);
+        view().showProductDetailsScreen(cartProductItem);
     }
 
     @Override
     public void confirmProductRemoval(@NonNull CartProductItem cartProductItem) {
-        this.myCartView.showProductRemovalConfirmation(cartProductItem);
+        view().showProductRemovalConfirmation(cartProductItem);
     }
 
     @Override
@@ -90,8 +87,8 @@ class MyCartPresenter implements MyCartContract.Presenter {
 
             @Override
             public void onProductRemoved(@NonNull CartProductItem cartProductItem) {
-                if (myCartView.isActive()) {
-                    myCartView.showProductRemovedFromCart(cartProductItem);
+                if (isAttached()) {
+                    view().showProductRemovedFromCart(cartProductItem);
                     refreshCartProductItems(cartProductItems, cartProductItem);
                 }
 
@@ -99,8 +96,8 @@ class MyCartPresenter implements MyCartContract.Presenter {
 
             @Override
             public void onFailure(@NonNull CartProductItem cartProductItem) {
-                if (myCartView.isActive()) {
-                    myCartView.showRemovalFromCartFailed(cartProductItem);
+                if (isAttached()) {
+                    view().showRemovalFromCartFailed(cartProductItem);
                 }
             }
         };
@@ -122,12 +119,12 @@ class MyCartPresenter implements MyCartContract.Presenter {
 
         // if list is empty that means no product left in cart
         if (items.isEmpty()) {
-            this.myCartView.showCartIsEmpty();
+            view().showCartIsEmpty();
             return;
         }
 
         // recalculate price and show items
         double price = cartProductItems.getTotalPrice() - cartProductItem.getProduct().getPrice();
-        this.myCartView.showCartProductItems(new CartProductItems(items, price));
+        view().showCartProductItems(new CartProductItems(items, price));
     }
 }

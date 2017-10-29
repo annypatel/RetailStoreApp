@@ -19,25 +19,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.vertaperic.android.support.SupportFragment;
 import com.vertaperic.store.R;
+import com.vertaperic.store.mvp.BaseFragment;
 import com.vertaperic.store.product.detail.ProductDetailsActivity;
 import com.vertaperic.store.widget.ListMarginDecoration;
-
-import javax.inject.Inject;
 
 /**
  * Fragment for displaying the products added in the cart.
  *
  * @author Anny Patel
  */
-public class MyCartFragment extends SupportFragment implements MyCartContract.View {
+public class MyCartFragment extends BaseFragment<MyCartContract.Presenter>
+        implements MyCartContract.View {
 
-    /**
-     * The presenter attached with this view.
-     */
-    @Inject
-    MyCartContract.Presenter presenter;
     /**
      * The binding instance for this view.
      */
@@ -67,7 +61,7 @@ public class MyCartFragment extends SupportFragment implements MyCartContract.Vi
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.binding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_cart, container, false);
-        this.binding.setPresenter(this.presenter);
+        this.binding.setPresenter(presenter());
 
         // configure RecyclerView
         this.binding.listProducts.setHasFixedSize(true);
@@ -76,11 +70,11 @@ public class MyCartFragment extends SupportFragment implements MyCartContract.Vi
         this.binding.listProducts.addItemDecoration(new ListMarginDecoration(margin));
 
         // create adapter and set it to recycle view
-        this.adapter = new CartProductItemsAdapter(getContext(), this.presenter);
+        this.adapter = new CartProductItemsAdapter(getContext(), presenter());
         this.binding.listProducts.setAdapter(this.adapter);
 
         // load products
-        this.presenter.loadCartProductItems();
+        presenter().loadCartProductItems();
 
         return this.binding.getRoot();
     }
@@ -132,7 +126,7 @@ public class MyCartFragment extends SupportFragment implements MyCartContract.Vi
                     public void onClick(DialogInterface dialog, int which) {
                         // remove now
                         CartProductItems cartProductItems = binding.getCartProductItems();
-                        presenter.removeProductFromCart(cartProductItems, cartProductItem);
+                        presenter().removeProductFromCart(cartProductItems, cartProductItem);
                     }
                 })
                 .setNegativeButton(R.string.my_cart_button_cancel, null)
@@ -157,10 +151,5 @@ public class MyCartFragment extends SupportFragment implements MyCartContract.Vi
     @Override
     public void handleBackPress() {
         ActivityCompat.finishAfterTransition(getActivity());
-    }
-
-    @Override
-    public boolean isActive() {
-        return isAdded();
     }
 }

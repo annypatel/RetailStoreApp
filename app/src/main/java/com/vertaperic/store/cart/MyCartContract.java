@@ -7,8 +7,8 @@ package com.vertaperic.store.cart;
 
 import android.support.annotation.NonNull;
 
-import com.vertaperic.store.app.IPresenter;
-import com.vertaperic.store.app.IView;
+import com.vertaperic.store.mvp.IPresenter;
+import com.vertaperic.store.mvp.IView;
 
 /**
  * This interface specifies the contract between the My Cart screen view and the presenter.
@@ -73,13 +73,6 @@ public interface MyCartContract {
          * To handle the toolbar back press event.
          */
         void handleBackPress();
-
-        /**
-         * To check if view is active or not.
-         *
-         * @return true if view is still active, otherwise false.
-         */
-        boolean isActive();
     }
 
     /**

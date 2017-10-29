@@ -19,8 +19,6 @@ import com.vertaperic.store.browse.BrowseActivity;
 import com.vertaperic.store.cart.MyCartActivity;
 import com.vertaperic.store.mvp.BaseFragment;
 
-import javax.inject.Inject;
-
 
 /**
  * The home fragment that will be displayed to user when the app is launched and HomeActivity is

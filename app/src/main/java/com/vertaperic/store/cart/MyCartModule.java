@@ -16,23 +16,6 @@ import dagger.Provides;
 @Module
 class MyCartModule {
 
-    /**
-     * The view for my cart screen.
-     */
-    private final MyCartContract.View view;
-
-    /**
-     * @param view The view for my cart screen.
-     */
-    MyCartModule(MyCartContract.View view) {
-        this.view = view;
-    }
-
-    @Provides
-    MyCartContract.View provideMyCartView() {
-        return view;
-    }
-
     @Provides
     MyCartContract.Presenter providePresenter(MyCartPresenter presenter) {
         return presenter;

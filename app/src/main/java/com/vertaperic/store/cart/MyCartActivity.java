@@ -41,7 +41,7 @@ public class MyCartActivity extends SupportAppCompatActivity {
         // inject dependencies with dagger
         DaggerMyCartComponent.builder()
                 .appComponent(App.getAppComponent(this))
-                .myCartModule(new MyCartModule(fragment))
+                .myCartModule(new MyCartModule())
                 .build()
                 .inject(fragment);
     }

@@ -7,9 +7,9 @@ package com.vertaperic.store.product;
 
 import android.support.annotation.NonNull;
 
+import com.vertaperic.store.category.Category;
 import com.vertaperic.store.mvp.IPresenter;
 import com.vertaperic.store.mvp.IView;
-import com.vertaperic.store.category.Category;
 
 import java.util.List;
 
