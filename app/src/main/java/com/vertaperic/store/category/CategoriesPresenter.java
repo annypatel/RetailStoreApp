@@ -7,7 +7,8 @@ package com.vertaperic.store.category;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.view.MenuItem;
+
+import com.vertaperic.store.mvp.BasePresenter;
 
 import java.util.List;
 
@@ -19,12 +20,9 @@ import javax.inject.Inject;
  *
  * @author Anny Patel
  */
-class CategoriesPresenter implements CategoriesContract.Presenter {
+class CategoriesPresenter extends BasePresenter<CategoriesContract.View>
+        implements CategoriesContract.Presenter {
 
-    /**
-     * The view attached with this presenter.
-     */
-    private CategoriesContract.View categoriesView;
     /**
      * The repository for loading categories.
      */
@@ -33,35 +31,33 @@ class CategoriesPresenter implements CategoriesContract.Presenter {
     /**
      * Constructs new CategoriesPresenter.
      *
-     * @param categoriesView The view attached with this presenter.
-     * @param repository     The repository for loading categories.
+     * @param repository The repository for loading categories.
      */
     @Inject
-    CategoriesPresenter(@NonNull CategoriesContract.View categoriesView, @NonNull CategoryRepository repository) {
-        this.categoriesView = categoriesView;
+    CategoriesPresenter(@NonNull CategoryRepository repository) {
         this.repository = repository;
     }
 
     @Override
     public void loadCategories(@Nullable Category mainCategory) {
-        this.categoriesView.setLoadingIndicator(true);
+        view().setLoadingIndicator(true);
 
         // create the loading callback
         CategoryRepository.LoadCategoriesCallback callback = new CategoryRepository.LoadCategoriesCallback() {
 
             @Override
             public void onCategoriesLoaded(@NonNull List<Category> categories) {
-                if (categoriesView.isActive()) {
-                    categoriesView.setLoadingIndicator(false);
-                    categoriesView.showCategories(categories);
+                if (isAttached()) {
+                    view().setLoadingIndicator(false);
+                    view().showCategories(categories);
                 }
             }
 
             @Override
             public void onDataNotAvailable() {
-                if (categoriesView.isActive()) {
-                    categoriesView.setLoadingIndicator(false);
-                    categoriesView.showCategoriesNotAvailable();
+                if (isAttached()) {
+                    view().setLoadingIndicator(false);
+                    view().showCategoriesNotAvailable();
                 }
             }
         };
@@ -77,9 +73,9 @@ class CategoriesPresenter implements CategoriesContract.Presenter {
     @Override
     public void selectCategory(@NonNull Category category) {
         if (category.hasSubCategories()) {
-            this.categoriesView.showSubCategoriesScreen(category);
+            view().showSubCategoriesScreen(category);
         } else {
-            this.categoriesView.showProductsScreen(category);
+            view().showProductsScreen(category);
         }
     }
 }

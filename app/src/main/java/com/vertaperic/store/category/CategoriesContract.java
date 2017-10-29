@@ -8,8 +8,8 @@ package com.vertaperic.store.category;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.vertaperic.store.app.IPresenter;
-import com.vertaperic.store.app.IView;
+import com.vertaperic.store.mvp.IPresenter;
+import com.vertaperic.store.mvp.IView;
 
 import java.util.List;
 
@@ -57,13 +57,6 @@ public interface CategoriesContract {
          * @param category The category.
          */
         void showProductsScreen(@NonNull Category category);
-
-        /**
-         * To check if view is active or not.
-         *
-         * @return true if view is still active, otherwise false.
-         */
-        boolean isActive();
     }
 
     /**

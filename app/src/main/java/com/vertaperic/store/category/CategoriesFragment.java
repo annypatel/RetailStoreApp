@@ -5,6 +5,7 @@
  */
 package com.vertaperic.store.category;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,16 +17,14 @@ import android.view.ViewGroup;
 
 import com.vertaperic.android.support.BreadcrumbTransactionInfo;
 import com.vertaperic.android.support.BreadcrumbsController;
-import com.vertaperic.android.support.SupportFragment;
 import com.vertaperic.store.R;
 import com.vertaperic.store.app.App;
 import com.vertaperic.store.browse.BrowseFragment;
+import com.vertaperic.store.mvp.BaseFragment;
 import com.vertaperic.store.product.ProductsFragment;
 import com.vertaperic.store.widget.GridMarginDecoration;
 
 import java.util.List;
-
-import javax.inject.Inject;
 
 /**
  * CategoriesFragment displays the grid of category or subcategory. If main category is passed
@@ -34,7 +33,8 @@ import javax.inject.Inject;
  *
  * @author Anny Patel
  */
-public class CategoriesFragment extends SupportFragment implements CategoriesContract.View {
+public class CategoriesFragment extends BaseFragment<CategoriesContract.Presenter>
+        implements CategoriesContract.View {
 
     /**
      * The extra key for providing main category to {@link CategoriesFragment}.
@@ -44,11 +44,6 @@ public class CategoriesFragment extends SupportFragment implements CategoriesCon
      */
     private static final String EXTRA_MAIN_CATEGORY = "com.vertaperic.store.MainCategory";
 
-    /**
-     * The presenter attached with this view.
-     */
-    @Inject
-    CategoriesContract.Presenter presenter;
     /**
      * The binding instance for this view.
      */
@@ -90,15 +85,15 @@ public class CategoriesFragment extends SupportFragment implements CategoriesCon
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
+    public void onAttach(Context context) {
         // inject dependencies with dagger
         DaggerCategoriesComponent.builder()
                 .appComponent(App.getAppComponent(getContext()))
-                .categoriesModule(new CategoriesModule(this))
+                .categoriesModule(new CategoriesModule())
                 .build()
                 .inject(this);
+
+        super.onAttach(context);
     }
 
     @Nullable
@@ -113,11 +108,11 @@ public class CategoriesFragment extends SupportFragment implements CategoriesCon
         this.binding.gridCategories.addItemDecoration(new GridMarginDecoration(margin));
 
         // create adapter and set it to recycle view
-        this.adapter = new CategoriesAdapter(getContext(), this.presenter);
+        this.adapter = new CategoriesAdapter(getContext(), presenter());
         this.binding.gridCategories.setAdapter(this.adapter);
 
         // load categories
-        this.presenter.loadCategories(getMainCategoryFromArguments());
+        presenter().loadCategories(getMainCategoryFromArguments());
 
         return this.binding.getRoot();
     }
@@ -168,11 +163,6 @@ public class CategoriesFragment extends SupportFragment implements CategoriesCon
                         .animate(true)
                         .addToBackStack(true)
         );
-    }
-
-    @Override
-    public boolean isActive() {
-        return isAdded();
     }
 
     /**
