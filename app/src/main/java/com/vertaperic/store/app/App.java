@@ -5,7 +5,6 @@
  */
 package com.vertaperic.store.app;
 
-import android.app.Application;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
@@ -13,12 +12,15 @@ import com.vertaperic.android.database.BaseSQLiteOpenHelper;
 import com.vertaperic.android.database.DatabaseController;
 import com.vertaperic.android.database.DatabaseManager;
 
+import dagger.android.AndroidInjector;
+import dagger.android.support.DaggerApplication;
+
 /**
  * Base application class for this app. Use this class to do one time initialization.
  *
  * @author Anny Patel
  */
-public class App extends Application {
+public class App extends DaggerApplication {
 
     /**
      * The dagger component for the app.
@@ -37,9 +39,7 @@ public class App extends Application {
     }
 
     @Override
-    public void onCreate() {
-        super.onCreate();
-
+    protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
         // create SQLite helper with lifecycle listener
         BaseSQLiteOpenHelper openHelper = DatabaseManager.newSQLiteOpenHelper(
                 this, AppDatabaseLifecycleListener.DATABASE_NAME,
@@ -51,8 +51,10 @@ public class App extends Application {
         databaseController.openAsync(null);
 
         // create the app component
-        this.appComponent = DaggerAppComponent.builder()
-                .appModule(new AppModule(this, databaseController))
-                .build();
+        this.appComponent = (AppComponent) DaggerAppComponent.builder()
+                .appModule(new AppModule(databaseController))
+                .create(this);
+
+        return this.appComponent;
     }
 }

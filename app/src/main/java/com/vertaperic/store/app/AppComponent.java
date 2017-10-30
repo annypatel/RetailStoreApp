@@ -10,6 +10,8 @@ import com.vertaperic.android.database.DatabaseController;
 import javax.inject.Singleton;
 
 import dagger.Component;
+import dagger.android.AndroidInjector;
+import dagger.android.support.AndroidSupportInjectionModule;
 
 /**
  * The dagger component for the app, manages application level dependencies, annotated as singleton
@@ -18,8 +20,12 @@ import dagger.Component;
  * @author Anny Patel
  */
 @Singleton
-@Component(modules = AppModule.class)
-public interface AppComponent {
+@Component(modules = {
+        AndroidSupportInjectionModule.class,
+        AppInjectionModule.class,
+        AppModule.class
+})
+public interface AppComponent extends AndroidInjector<App> {
 
     /**
      * To get the database controller.
@@ -27,4 +33,11 @@ public interface AppComponent {
      * @return The database controller.
      */
     DatabaseController getDatabaseController();
+
+
+    @Component.Builder
+    abstract class Builder extends AndroidInjector.Builder<App> {
+
+        abstract Builder appModule(AppModule appModule);
+    }
 }

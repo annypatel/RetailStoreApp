@@ -21,26 +21,15 @@ import dagger.Provides;
 class AppModule {
 
     /**
-     * The application context.
-     */
-    private final Context context;
-    /**
      * The database controller.
      */
     private final DatabaseController databaseController;
 
     /**
-     * @param context            The application context.
      * @param databaseController The database controller.
      */
-    AppModule(Context context, DatabaseController databaseController) {
-        this.context = context;
+    AppModule(DatabaseController databaseController) {
         this.databaseController = databaseController;
-    }
-
-    @Provides
-    Context provideContext() {
-        return this.context;
     }
 
     @Provides
