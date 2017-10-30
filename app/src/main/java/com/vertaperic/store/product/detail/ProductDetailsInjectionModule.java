@@ -7,6 +7,7 @@ package com.vertaperic.store.product.detail;
 
 import com.vertaperic.store.cart.CartRepository;
 import com.vertaperic.store.cart.LocalCartRepository;
+import com.vertaperic.store.util.FragmentScoped;
 
 import dagger.Binds;
 import dagger.Module;
@@ -20,6 +21,7 @@ import dagger.android.ContributesAndroidInjector;
 @Module
 public abstract class ProductDetailsInjectionModule {
 
+    @FragmentScoped
     @ContributesAndroidInjector(modules = Declarations.class)
     abstract ProductDetailsFragment contributeProductDetailsFragmentInjector();
 

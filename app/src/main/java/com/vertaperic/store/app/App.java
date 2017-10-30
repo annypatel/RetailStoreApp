@@ -5,9 +5,6 @@
  */
 package com.vertaperic.store.app;
 
-import android.content.Context;
-import android.support.annotation.NonNull;
-
 import com.vertaperic.android.database.BaseSQLiteOpenHelper;
 import com.vertaperic.android.database.DatabaseController;
 import com.vertaperic.android.database.DatabaseManager;
@@ -22,22 +19,6 @@ import dagger.android.support.DaggerApplication;
  */
 public class App extends DaggerApplication {
 
-    /**
-     * The dagger component for the app.
-     */
-    private AppComponent appComponent;
-
-    /**
-     * To get the single instance of AppComponent managed by {@link App} class.
-     *
-     * @param context The host context.
-     * @return The app component.
-     */
-    public static AppComponent getAppComponent(@NonNull Context context) {
-        App app = (App) context.getApplicationContext();
-        return app.appComponent;
-    }
-
     @Override
     protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
         // create SQLite helper with lifecycle listener
@@ -50,11 +31,8 @@ public class App extends DaggerApplication {
         DatabaseController databaseController = DatabaseManager.newDatabaseController(openHelper);
         databaseController.openAsync(null);
 
-        // create the app component
-        this.appComponent = (AppComponent) DaggerAppComponent.builder()
+        return DaggerAppComponent.builder()
                 .appModule(new AppModule(databaseController))
                 .create(this);
-
-        return this.appComponent;
     }
 }

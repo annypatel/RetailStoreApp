@@ -5,8 +5,6 @@
  */
 package com.vertaperic.store.app;
 
-import com.vertaperic.android.database.DatabaseController;
-
 import javax.inject.Singleton;
 
 import dagger.Component;
@@ -25,15 +23,7 @@ import dagger.android.support.AndroidSupportInjectionModule;
         AppInjectionModule.class,
         AppModule.class
 })
-public interface AppComponent extends AndroidInjector<App> {
-
-    /**
-     * To get the database controller.
-     *
-     * @return The database controller.
-     */
-    DatabaseController getDatabaseController();
-
+interface AppComponent extends AndroidInjector<App> {
 
     @Component.Builder
     abstract class Builder extends AndroidInjector.Builder<App> {

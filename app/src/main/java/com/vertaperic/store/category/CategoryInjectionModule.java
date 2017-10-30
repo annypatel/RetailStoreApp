@@ -5,6 +5,8 @@
  */
 package com.vertaperic.store.category;
 
+import com.vertaperic.store.util.FragmentScoped;
+
 import dagger.Binds;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -17,6 +19,7 @@ import dagger.android.ContributesAndroidInjector;
 @Module
 public abstract class CategoryInjectionModule {
 
+    @FragmentScoped
     @ContributesAndroidInjector(modules = Declarations.class)
     abstract CategoriesFragment contributeCategoriesFragmentInjector();
 

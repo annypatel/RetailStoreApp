@@ -5,7 +5,6 @@
  */
 package com.vertaperic.store.product;
 
-import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -23,8 +22,6 @@ import com.vertaperic.store.product.detail.ProductDetailsActivity;
 import com.vertaperic.store.widget.ListMarginDecoration;
 
 import java.util.List;
-
-import dagger.android.support.AndroidSupportInjection;
 
 /**
  * ProductFragment will displays the list of products by specified category. Pass category to this
@@ -73,12 +70,6 @@ public class ProductsFragment extends BaseFragment<ProductsContract.Presenter>
         ProductsFragment fragment = new ProductsFragment();
         fragment.setArguments(arguments);
         return fragment;
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        AndroidSupportInjection.inject(this);
-        super.onAttach(context);
     }
 
     @Nullable

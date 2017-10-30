@@ -5,7 +5,6 @@
  */
 package com.vertaperic.store.category;
 
-import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -24,8 +23,6 @@ import com.vertaperic.store.product.ProductsFragment;
 import com.vertaperic.store.widget.GridMarginDecoration;
 
 import java.util.List;
-
-import dagger.android.support.AndroidSupportInjection;
 
 /**
  * CategoriesFragment displays the grid of category or subcategory. If main category is passed
@@ -83,12 +80,6 @@ public class CategoriesFragment extends BaseFragment<CategoriesContract.Presente
         CategoriesFragment fragment = newInstance();
         fragment.setArguments(arguments);
         return fragment;
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        AndroidSupportInjection.inject(this);
-        super.onAttach(context);
     }
 
     @Nullable

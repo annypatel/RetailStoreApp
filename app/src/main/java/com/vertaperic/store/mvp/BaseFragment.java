@@ -6,6 +6,8 @@ import com.vertaperic.store.app.NavigationDrawerFragment;
 
 import javax.inject.Inject;
 
+import dagger.android.support.AndroidSupportInjection;
+
 /**
  * Base fragment with Model-View-Presenter support.
  *
@@ -28,6 +30,7 @@ public class BaseFragment<P extends IPresenter> extends NavigationDrawerFragment
 
     @Override
     public void onAttach(Context context) {
+        AndroidSupportInjection.inject(this);
         super.onAttach(context);
         presenter().bind(this);
     }

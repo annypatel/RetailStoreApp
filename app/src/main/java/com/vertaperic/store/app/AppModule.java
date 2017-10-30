@@ -5,8 +5,6 @@
  */
 package com.vertaperic.store.app;
 
-import android.content.Context;
-
 import com.vertaperic.android.database.DatabaseController;
 
 import dagger.Module;

@@ -5,7 +5,6 @@
  */
 package com.vertaperic.store.product.detail;
 
-import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -22,8 +21,6 @@ import com.vertaperic.store.cart.CartItem;
 import com.vertaperic.store.cart.MyCartActivity;
 import com.vertaperic.store.mvp.BaseFragment;
 import com.vertaperic.store.product.Product;
-
-import dagger.android.support.AndroidSupportInjection;
 
 /**
  * ProductDetailsFragment will displays the product details for the supplied product. Pass product
@@ -80,12 +77,6 @@ public class ProductDetailsFragment extends BaseFragment<ProductDetailsContract.
         ProductDetailsFragment fragment = new ProductDetailsFragment();
         fragment.setArguments(arguments);
         return fragment;
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        AndroidSupportInjection.inject(this);
-        super.onAttach(context);
     }
 
     @Nullable

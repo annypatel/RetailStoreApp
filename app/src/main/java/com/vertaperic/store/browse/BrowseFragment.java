@@ -5,7 +5,6 @@
  */
 package com.vertaperic.store.browse;
 
-import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -23,8 +22,6 @@ import com.vertaperic.store.R;
 import com.vertaperic.store.cart.MyCartActivity;
 import com.vertaperic.store.category.CategoriesFragment;
 import com.vertaperic.store.mvp.BaseFragment;
-
-import dagger.android.support.AndroidSupportInjection;
 
 /**
  * The fragment for category wise product browsing functionality.
@@ -53,12 +50,6 @@ public class BrowseFragment extends BaseFragment<BrowseContract.Presenter>
      */
     public static BrowseFragment newInstance() {
         return new BrowseFragment();
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        AndroidSupportInjection.inject(this);
-        super.onAttach(context);
     }
 
     @Nullable

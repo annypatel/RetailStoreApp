@@ -5,7 +5,6 @@
  */
 package com.vertaperic.store.about;
 
-import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -17,8 +16,6 @@ import android.view.ViewGroup;
 import com.vertaperic.store.R;
 import com.vertaperic.store.cart.MyCartActivity;
 import com.vertaperic.store.mvp.BaseFragment;
-
-import dagger.android.support.AndroidSupportInjection;
 
 /**
  * The fragment for displaying the information about the app and the company.
@@ -42,12 +39,6 @@ public class AboutFragment extends BaseFragment<AboutContract.Presenter>
      */
     public static AboutFragment newInstance() {
         return new AboutFragment();
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        AndroidSupportInjection.inject(this);
-        super.onAttach(context);
     }
 
     @Nullable
