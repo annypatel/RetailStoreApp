@@ -11,6 +11,7 @@ import com.vertaperic.store.cart.MyCartInjectionModule;
 import com.vertaperic.store.category.CategoryInjectionModule;
 import com.vertaperic.store.home.HomeInjectionModule;
 import com.vertaperic.store.product.ProductInjectionModule;
+import com.vertaperic.store.product.detail.ProductDetailsInjectionModule;
 
 import dagger.Module;
 
@@ -24,6 +25,7 @@ import dagger.Module;
         BrowseInjectionModule.class,
         CategoryInjectionModule.class,
         ProductInjectionModule.class,
+        ProductDetailsInjectionModule.class,
         MyCartInjectionModule.class,
         AboutInjectionModule.class,
 })

@@ -14,7 +14,6 @@ import android.support.annotation.Nullable;
 import com.vertaperic.android.support.FragmentTransactionInfo;
 import com.vertaperic.android.support.SupportAppCompatActivity;
 import com.vertaperic.store.R;
-import com.vertaperic.store.app.App;
 import com.vertaperic.store.cart.CartItem;
 import com.vertaperic.store.product.Product;
 
@@ -53,13 +52,6 @@ public class ProductDetailsActivity extends SupportAppCompatActivity {
                     new FragmentTransactionInfo(fragment, R.id.container)
             );
         }
-
-        // inject dependencies with dagger
-        DaggerProductDetailsComponent.builder()
-                .appComponent(App.getAppComponent(this))
-                .productDetailsModule(new ProductDetailsModule())
-                .build()
-                .inject(fragment);
     }
 
     /**
