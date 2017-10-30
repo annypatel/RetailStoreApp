@@ -34,11 +34,5 @@ public class AboutActivity extends NavigationDrawerActivity {
                     new NavigationTransactionInfo(fragment, R.id.itemAbout, R.id.container)
             );
         }
-
-        // inject dependencies with dagger
-        DaggerAboutComponent.builder()
-                .aboutModule(new AboutModule())
-                .build()
-                .inject(fragment);
     }
 }
