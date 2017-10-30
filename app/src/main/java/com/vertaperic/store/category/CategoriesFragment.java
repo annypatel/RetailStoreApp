@@ -18,13 +18,14 @@ import android.view.ViewGroup;
 import com.vertaperic.android.support.BreadcrumbTransactionInfo;
 import com.vertaperic.android.support.BreadcrumbsController;
 import com.vertaperic.store.R;
-import com.vertaperic.store.app.App;
 import com.vertaperic.store.browse.BrowseFragment;
 import com.vertaperic.store.mvp.BaseFragment;
 import com.vertaperic.store.product.ProductsFragment;
 import com.vertaperic.store.widget.GridMarginDecoration;
 
 import java.util.List;
+
+import dagger.android.support.AndroidSupportInjection;
 
 /**
  * CategoriesFragment displays the grid of category or subcategory. If main category is passed
@@ -86,13 +87,7 @@ public class CategoriesFragment extends BaseFragment<CategoriesContract.Presente
 
     @Override
     public void onAttach(Context context) {
-        // inject dependencies with dagger
-        DaggerCategoriesComponent.builder()
-                .appComponent(App.getAppComponent(getContext()))
-                .categoriesModule(new CategoriesModule())
-                .build()
-                .inject(this);
-
+        AndroidSupportInjection.inject(this);
         super.onAttach(context);
     }
 
