@@ -17,13 +17,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.vertaperic.store.R;
-import com.vertaperic.store.app.App;
 import com.vertaperic.store.category.Category;
 import com.vertaperic.store.mvp.BaseFragment;
 import com.vertaperic.store.product.detail.ProductDetailsActivity;
 import com.vertaperic.store.widget.ListMarginDecoration;
 
 import java.util.List;
+
+import dagger.android.support.AndroidSupportInjection;
 
 /**
  * ProductFragment will displays the list of products by specified category. Pass category to this
@@ -76,13 +77,7 @@ public class ProductsFragment extends BaseFragment<ProductsContract.Presenter>
 
     @Override
     public void onAttach(Context context) {
-        // inject dependencies with dagger
-        DaggerProductsComponent.builder()
-                .appComponent(App.getAppComponent(getContext()))
-                .productsModule(new ProductsModule())
-                .build()
-                .inject(this);
-
+        AndroidSupportInjection.inject(this);
         super.onAttach(context);
     }
 
