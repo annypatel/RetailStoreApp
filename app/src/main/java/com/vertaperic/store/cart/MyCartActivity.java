@@ -12,7 +12,6 @@ import android.support.annotation.Nullable;
 import com.vertaperic.android.support.FragmentTransactionInfo;
 import com.vertaperic.android.support.SupportAppCompatActivity;
 import com.vertaperic.store.R;
-import com.vertaperic.store.app.App;
 
 /**
  * Activity for hosting the {@link MyCartFragment}, displays the products added into the cart.
@@ -37,12 +36,5 @@ public class MyCartActivity extends SupportAppCompatActivity {
                     new FragmentTransactionInfo(fragment, R.id.container)
             );
         }
-
-        // inject dependencies with dagger
-        DaggerMyCartComponent.builder()
-                .appComponent(App.getAppComponent(this))
-                .myCartModule(new MyCartModule())
-                .build()
-                .inject(fragment);
     }
 }

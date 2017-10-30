@@ -5,6 +5,7 @@
  */
 package com.vertaperic.store.cart;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -23,6 +24,8 @@ import com.vertaperic.store.R;
 import com.vertaperic.store.mvp.BaseFragment;
 import com.vertaperic.store.product.detail.ProductDetailsActivity;
 import com.vertaperic.store.widget.ListMarginDecoration;
+
+import dagger.android.support.AndroidSupportInjection;
 
 /**
  * Fragment for displaying the products added in the cart.
@@ -55,6 +58,12 @@ public class MyCartFragment extends BaseFragment<MyCartContract.Presenter>
      */
     public static MyCartFragment newInstance() {
         return new MyCartFragment();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        AndroidSupportInjection.inject(this);
+        super.onAttach(context);
     }
 
     @Nullable
