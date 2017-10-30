@@ -5,6 +5,7 @@
  */
 package com.vertaperic.store.search;
 
+import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -16,6 +17,8 @@ import android.view.ViewGroup;
 import com.vertaperic.store.R;
 import com.vertaperic.store.cart.MyCartActivity;
 import com.vertaperic.store.mvp.BaseFragment;
+
+import dagger.android.support.AndroidSupportInjection;
 
 /**
  * The fragment for product search functionality. This fragment is only for demo purpose, no search
@@ -40,6 +43,12 @@ public class SearchFragment extends BaseFragment<SearchContract.Presenter>
      */
     public static SearchFragment newInstance() {
         return new SearchFragment();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        AndroidSupportInjection.inject(this);
+        super.onAttach(context);
     }
 
     @Nullable

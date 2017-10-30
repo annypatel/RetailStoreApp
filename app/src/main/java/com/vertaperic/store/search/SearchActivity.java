@@ -35,11 +35,5 @@ public class SearchActivity extends NavigationDrawerActivity {
                     new NavigationTransactionInfo(fragment, R.id.itemSearch, R.id.container)
             );
         }
-
-        // inject dependencies with dagger
-        DaggerSearchComponent.builder()
-                .searchModule(new SearchModule())
-                .build()
-                .inject(fragment);
     }
 }
