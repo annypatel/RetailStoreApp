@@ -6,6 +6,7 @@
 package com.vertaperic.store.app;
 
 import com.vertaperic.store.about.AboutInjectionModule;
+import com.vertaperic.store.browse.BrowseInjectionModule;
 
 import dagger.Module;
 
@@ -15,6 +16,7 @@ import dagger.Module;
  * @author Anny Patel
  */
 @Module(includes = {
+        BrowseInjectionModule.class,
         AboutInjectionModule.class,
 })
 class AppInjectionModule {
