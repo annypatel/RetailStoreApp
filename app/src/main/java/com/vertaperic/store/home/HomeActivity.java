@@ -38,11 +38,5 @@ public class HomeActivity extends NavigationDrawerActivity {
                     new NavigationTransactionInfo(fragment, R.id.itemHome, R.id.container)
             );
         }
-
-        // inject dependencies with dagger
-        DaggerHomeComponent.builder()
-                .homeModule(new HomeModule())
-                .build()
-                .inject(fragment);
     }
 }

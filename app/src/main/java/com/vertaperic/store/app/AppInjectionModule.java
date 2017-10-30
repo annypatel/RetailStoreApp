@@ -9,6 +9,7 @@ import com.vertaperic.store.about.AboutInjectionModule;
 import com.vertaperic.store.browse.BrowseInjectionModule;
 import com.vertaperic.store.cart.MyCartInjectionModule;
 import com.vertaperic.store.category.CategoryInjectionModule;
+import com.vertaperic.store.home.HomeInjectionModule;
 
 import dagger.Module;
 
@@ -18,6 +19,7 @@ import dagger.Module;
  * @author Anny Patel
  */
 @Module(includes = {
+        HomeInjectionModule.class,
         BrowseInjectionModule.class,
         CategoryInjectionModule.class,
         MyCartInjectionModule.class,

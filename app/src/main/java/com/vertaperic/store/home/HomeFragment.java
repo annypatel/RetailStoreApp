@@ -5,6 +5,7 @@
  */
 package com.vertaperic.store.home;
 
+import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import com.vertaperic.store.browse.BrowseActivity;
 import com.vertaperic.store.cart.MyCartActivity;
 import com.vertaperic.store.mvp.BaseFragment;
 
+import dagger.android.support.AndroidSupportInjection;
 
 /**
  * The home fragment that will be displayed to user when the app is launched and HomeActivity is
@@ -50,6 +52,12 @@ public class HomeFragment extends BaseFragment<HomeContract.Presenter>
      */
     public static HomeFragment newInstance() {
         return new HomeFragment();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        AndroidSupportInjection.inject(this);
+        super.onAttach(context);
     }
 
     @Nullable
