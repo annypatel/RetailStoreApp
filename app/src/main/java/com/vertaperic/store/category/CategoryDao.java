@@ -13,6 +13,8 @@ import com.vertaperic.android.database.RowObjectMapper;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 /**
  * The data access object for the {@link Category}.
  *
@@ -25,6 +27,7 @@ public class CategoryDao extends BaseDao<Category> {
      *
      * @param controller The database controller.
      */
+    @Inject
     CategoryDao(@NonNull DatabaseController controller) {
         super(controller, "categories");
     }

@@ -19,6 +19,8 @@ import com.vertaperic.store.product.ProductMapper;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 /**
  * The data access object for cart items.
  *
@@ -31,6 +33,7 @@ public class CartItemDao extends BaseDao<CartItem> {
      *
      * @param controller The database controller.
      */
+    @Inject
     public CartItemDao(@NonNull DatabaseController controller) {
         super(controller, "cart");
     }

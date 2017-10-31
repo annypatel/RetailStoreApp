@@ -8,7 +8,6 @@ package com.vertaperic.store.product;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
-import com.vertaperic.android.database.DatabaseController;
 import com.vertaperic.store.category.Category;
 import com.vertaperic.store.util.Simulation;
 
@@ -24,18 +23,18 @@ import javax.inject.Inject;
 class LocalProductsRepository implements ProductsRepository {
 
     /**
-     * The database controller.
+     * The product DAO.
      */
-    private DatabaseController databaseController;
+    private final ProductDao productDao;
 
     /**
      * Constructs new LocalProductsRepository.
      *
-     * @param databaseController The database controller.
+     * @param productDao The product DAO.
      */
     @Inject
-    LocalProductsRepository(@NonNull DatabaseController databaseController) {
-        this.databaseController = databaseController;
+    LocalProductsRepository(@NonNull ProductDao productDao) {
+        this.productDao = productDao;
     }
 
 
@@ -48,8 +47,7 @@ class LocalProductsRepository implements ProductsRepository {
                 Simulation.sleep();
 
                 // get products for category
-                ProductDao dao = new ProductDao(databaseController);
-                return dao.getProducts(category);
+                return productDao.getProducts(category);
             }
 
             @Override

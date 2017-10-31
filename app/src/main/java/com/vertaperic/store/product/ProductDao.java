@@ -14,6 +14,8 @@ import com.vertaperic.store.category.Category;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 /**
  * The data access object for the {@link Product}.
  *
@@ -26,6 +28,7 @@ public class ProductDao extends BaseDao<Product> {
      *
      * @param controller The database controller.
      */
+    @Inject
     ProductDao(@NonNull DatabaseController controller) {
         super(controller, "products");
     }

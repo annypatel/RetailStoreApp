@@ -9,7 +9,6 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.vertaperic.android.database.DatabaseController;
 import com.vertaperic.store.product.Product;
 import com.vertaperic.store.util.Simulation;
 
@@ -23,18 +22,18 @@ import javax.inject.Inject;
 public class LocalCartRepository implements CartRepository {
 
     /**
-     * The database controller.
+     * The cart item DAO.
      */
-    private DatabaseController databaseController;
+    private final CartItemDao cartItemDao;
 
     /**
      * Constructs new LocalCartRepository.
      *
-     * @param databaseController The database controller.
+     * @param cartItemDao The cart item DAO.
      */
     @Inject
-    LocalCartRepository(@NonNull DatabaseController databaseController) {
-        this.databaseController = databaseController;
+    LocalCartRepository(@NonNull CartItemDao cartItemDao) {
+        this.cartItemDao = cartItemDao;
     }
 
     @Override
@@ -46,15 +45,14 @@ public class LocalCartRepository implements CartRepository {
             protected CartProductItems doInBackground(Void... params) {
                 Simulation.sleep();
 
-                CartItemDao dao = new CartItemDao(databaseController);
-                List<CartProductItem> products = dao.getProductsInCart();
+                List<CartProductItem> products = cartItemDao.getProductsInCart();
                 // if no items found
                 if (products.isEmpty()) {
                     return null;
                 }
 
                 // else get total price
-                double price = dao.getTotalPrice();
+                double price = cartItemDao.getTotalPrice();
                 return new CartProductItems(products, price);
             }
 
@@ -79,8 +77,7 @@ public class LocalCartRepository implements CartRepository {
             protected CartItem doInBackground(Void... params) {
                 Simulation.sleep();
 
-                CartItemDao dao = new CartItemDao(databaseController);
-                return dao.addProductToCart(product);
+                return cartItemDao.addProductToCart(product);
             }
 
             @Override
@@ -104,8 +101,7 @@ public class LocalCartRepository implements CartRepository {
             protected Boolean doInBackground(Void... params) {
                 Simulation.sleep();
 
-                CartItemDao dao = new CartItemDao(databaseController);
-                return dao.removeProductFromCart(cartProductItem);
+                return cartItemDao.removeProductFromCart(cartProductItem);
             }
 
             @Override
@@ -129,8 +125,7 @@ public class LocalCartRepository implements CartRepository {
             protected CartItem doInBackground(Void... params) {
                 Simulation.sleep();
 
-                CartItemDao dao = new CartItemDao(databaseController);
-                return dao.getCartItem(product);
+                return cartItemDao.getCartItem(product);
             }
 
             @Override
