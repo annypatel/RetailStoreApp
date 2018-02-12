@@ -26,7 +26,7 @@ class CategoriesPresenter extends BasePresenter<CategoriesContract.View>
     /**
      * The repository for loading categories.
      */
-    private CategoryRepository repository;
+    private final CategoryRepository repository;
 
     /**
      * Constructs new CategoriesPresenter.

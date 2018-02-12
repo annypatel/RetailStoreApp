@@ -59,7 +59,7 @@ public class MyCartFragment extends BaseFragment<MyCartContract.Presenter>
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.binding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_cart, container, false);
         this.binding.setPresenter(presenter());
 

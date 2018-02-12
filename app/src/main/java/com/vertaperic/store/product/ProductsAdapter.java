@@ -29,11 +29,11 @@ class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHolder> {
     /**
      * The layout inflater.
      */
-    private LayoutInflater inflater;
+    private final LayoutInflater inflater;
     /**
      * The presenter for products screen {@link ProductsFragment}.
      */
-    private ProductsContract.Presenter presenter;
+    private final ProductsContract.Presenter presenter;
 
     /**
      * Constructs new ProductsAdapter.
@@ -78,7 +78,7 @@ class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHolder> {
         /**
          * The binding instance for product list item.
          */
-        private ProductListItemBinding binding;
+        private final ProductListItemBinding binding;
 
         /**
          * @param binding The binding for product list item.

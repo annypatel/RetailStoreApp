@@ -8,6 +8,7 @@ package com.vertaperic.store.home;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
@@ -53,7 +54,7 @@ public class HomeFragment extends BaseFragment<HomeContract.Presenter>
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false);
         this.binding.toolbar.inflateMenu(R.menu.menu_my_cart);
         this.binding.setPresenter(presenter());

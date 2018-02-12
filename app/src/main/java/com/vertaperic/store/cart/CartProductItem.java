@@ -17,11 +17,11 @@ public class CartProductItem {
     /**
      * The cart item for the product.
      */
-    private CartItem cartItem;
+    private final CartItem cartItem;
     /**
      * The product added in the cart.
      */
-    private Product product;
+    private final Product product;
 
     /**
      * Constructs new CartProductItem.

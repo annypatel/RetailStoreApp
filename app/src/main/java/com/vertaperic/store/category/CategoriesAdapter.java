@@ -29,11 +29,11 @@ class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.ViewHolde
     /**
      * The layout inflater.
      */
-    private LayoutInflater inflater;
+    private final LayoutInflater inflater;
     /**
      * The presenter for category screen {@link CategoriesFragment}.
      */
-    private CategoriesContract.Presenter presenter;
+    private final CategoriesContract.Presenter presenter;
 
     /**
      * Constructs new CategoriesAdapter.
@@ -79,7 +79,7 @@ class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.ViewHolde
         /**
          * The binding instance for category grid item.
          */
-        private CategoryGridItemBinding binding;
+        private final CategoryGridItemBinding binding;
 
         /**
          * @param binding The binding for category grid item.

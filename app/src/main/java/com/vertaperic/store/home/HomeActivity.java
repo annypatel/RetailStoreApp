@@ -7,7 +7,6 @@ package com.vertaperic.store.home;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.view.ViewCompat;
 
 import com.vertaperic.android.support.NavigationTransactionInfo;
 import com.vertaperic.store.R;
@@ -25,7 +24,7 @@ public class HomeActivity extends NavigationDrawerActivity {
         super.onCreate(savedInstanceState);
 
         // enable fitSystemWindow to draw behind the status bar
-        ViewCompat.setFitsSystemWindows(this.binding.container, true);
+        this.binding.container.setFitsSystemWindows(true);
 
         // create the fragment
         HomeFragment fragment = (HomeFragment) getSupportFragmentManager()

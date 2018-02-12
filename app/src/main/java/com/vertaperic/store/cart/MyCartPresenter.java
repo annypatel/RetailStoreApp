@@ -25,7 +25,7 @@ class MyCartPresenter extends BasePresenter<MyCartContract.View>
     /**
      * The repository for accessing cart data.
      */
-    private CartRepository repository;
+    private final CartRepository repository;
 
     /**
      * Constructs new MyCartPresenter.

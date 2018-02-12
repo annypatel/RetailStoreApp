@@ -81,7 +81,7 @@ public class ProductDetailsFragment extends BaseFragment<ProductDetailsContract.
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.binding = DataBindingUtil.inflate(inflater, R.layout.fragment_product_details, container, false);
         this.binding.setPresenter(presenter());
 

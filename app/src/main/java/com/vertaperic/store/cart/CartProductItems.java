@@ -17,11 +17,11 @@ public class CartProductItems {
     /**
      * The products added in cart.
      */
-    private List<CartProductItem> cartProductItems;
+    private final List<CartProductItem> cartProductItems;
     /**
      * The sum of price of products added in cart.
      */
-    private double totalPrice;
+    private final double totalPrice;
 
     /**
      * Constructs new CartProductItem.

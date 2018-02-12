@@ -51,9 +51,6 @@ class FragmentControllerImpl extends FragmentController {
         }
 
         // if fragment is removed then return
-        if (this.backStackManager.remove(true)) {
-            return true;
-        }
-        return false;
+        return this.backStackManager.remove(true);
     }
 }

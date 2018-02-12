@@ -8,6 +8,7 @@ package com.vertaperic.store.about;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,7 +44,7 @@ public class AboutFragment extends BaseFragment<AboutContract.Presenter>
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         AboutFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_about, container, false);
         binding.toolbar.inflateMenu(R.menu.menu_my_cart);
         binding.setPresenter(presenter());

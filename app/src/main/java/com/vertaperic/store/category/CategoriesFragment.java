@@ -84,7 +84,7 @@ public class CategoriesFragment extends BaseFragment<CategoriesContract.Presente
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.binding = DataBindingUtil.inflate(inflater, R.layout.fragment_categories, container, false);
 
         // configure RecyclerView

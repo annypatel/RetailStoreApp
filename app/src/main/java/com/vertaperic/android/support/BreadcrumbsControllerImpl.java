@@ -21,11 +21,11 @@ class BreadcrumbsControllerImpl extends BreadcrumbsController {
     /**
      * The fragment controller.
      */
-    private FragmentController controller;
+    private final FragmentController controller;
     /**
      * The breadcrumb view.
      */
-    private BreadcrumbsView breadcrumbsView;
+    private final BreadcrumbsView breadcrumbsView;
 
     /**
      * Constructs new BreadcrumbsControllerImpl.

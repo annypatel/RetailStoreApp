@@ -218,7 +218,7 @@ class DefaultDatabaseController implements DatabaseController {
         /**
          * The SQLite open helper.
          */
-        private BaseSQLiteOpenHelper openHelper;
+        private final BaseSQLiteOpenHelper openHelper;
 
         DefaultWrapper(BaseSQLiteOpenHelper openHelper) {
             this.openHelper = openHelper;

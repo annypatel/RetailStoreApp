@@ -28,7 +28,7 @@ public class BreadcrumbTransactionInfo {
     /**
      * The breadcrumb section title.
      */
-    String title;
+    final String title;
     /**
      * The tag for the fragment, by default it is fully qualified name of class appended with
      * {@link #title}.
@@ -69,7 +69,7 @@ public class BreadcrumbTransactionInfo {
      * @return The tag for the fragment used with fragment transaction, fully qualified name of
      * class appended with title.
      */
-    public static String defaultTag(String title, Class<? extends SupportFragment> clazz) {
+    private static String defaultTag(String title, Class<? extends SupportFragment> clazz) {
         return clazz.getName() + "." + title;
     }
 

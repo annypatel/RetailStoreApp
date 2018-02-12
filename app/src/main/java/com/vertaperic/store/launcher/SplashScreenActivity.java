@@ -26,10 +26,10 @@ public class SplashScreenActivity extends AppCompatActivity {
      */
     private static final int SPLASH_TIME = 3000;
     /**
-     * Boolean flag to indicate that the activity has gone into paused state. It
-     * is <code>true</code> if activity is paused otherwise <code>false</code>.
+     * Boolean flag to indicate that the activity is in resumed state. It is <code>true</code>
+     * if activity is resumed otherwise <code>false</code>.
      */
-    private boolean paused;
+    private boolean resumed;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,7 +42,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                     @Override
                     public void run() {
 
-                        if (!isPaused()) {
+                        if (isResumed()) {
                             startActivity(new Intent(SplashScreenActivity.this, HomeActivity.class));
                         }
                         finish();
@@ -53,29 +53,28 @@ public class SplashScreenActivity extends AppCompatActivity {
     }
 
     /**
-     * @return <code>true</code> if activity paused else <code>false</code>.
+     * @return <code>true</code> if activity resumed else <code>false</code>.
      */
-    private boolean isPaused() {
-        return this.paused;
+    private boolean isResumed() {
+        return this.resumed;
     }
 
     /**
-     * @param isPaused <code>true</code> if activity paused else
-     *                 <code>false</code>.
+     * @param resumed <code>true</code> if activity resumed else <code>false</code>.
      */
-    private void setPaused(boolean isPaused) {
-        this.paused = isPaused;
+    private void setResumed(boolean resumed) {
+        this.resumed = resumed;
     }
 
     @Override
     protected void onPause() {
-        setPaused(true);
+        setResumed(false);
         super.onPause();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        setPaused(false);
+        setResumed(true);
     }
 }

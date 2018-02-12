@@ -15,13 +15,13 @@ import android.support.annotation.AnimRes;
 public class FragmentAnimation {
 
     @AnimRes
-    int enter;
+    final int enter;
     @AnimRes
-    int exit;
+    final int exit;
     @AnimRes
-    int popEnter;
+    final int popEnter;
     @AnimRes
-    int popExit;
+    final int popExit;
 
     /**
      * Specific animation resources to run for the fragments that are entering and exiting in

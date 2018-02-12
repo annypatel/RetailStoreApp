@@ -125,8 +125,8 @@ public class CartItemDao extends BaseDao<CartItem> {
         // create new mapper for CartProductItem
         RowObjectMapper<CartProductItem> mapper = new SimpleRowObjectMapper<CartProductItem>() {
 
-            CartItemMapper cartItemMapper = new CartItemMapper();
-            ProductMapper productMapper = new ProductMapper();
+            final CartItemMapper cartItemMapper = new CartItemMapper();
+            final ProductMapper productMapper = new ProductMapper();
 
             @Override
             public CartProductItem map(@NonNull ContentValues cv) {

@@ -20,7 +20,7 @@ class DefaultSQLiteOpenHelper extends BaseSQLiteOpenHelper {
     /**
      * The context attached with this helper.
      */
-    private Context context;
+    private final Context context;
     /**
      * The SQLite callbacks.
      */
@@ -102,11 +102,11 @@ class DefaultSQLiteOpenHelper extends BaseSQLiteOpenHelper {
         /**
          * The SQLite open helper.
          */
-        private BaseSQLiteOpenHelper openHelper;
+        private final BaseSQLiteOpenHelper openHelper;
         /**
          * The SQLite database.
          */
-        private SQLiteDatabase database;
+        private final SQLiteDatabase database;
 
         CachedWrapper(BaseSQLiteOpenHelper openHelper, SQLiteDatabase database) {
             this.openHelper = openHelper;

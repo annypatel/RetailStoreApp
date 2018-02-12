@@ -29,7 +29,7 @@ class ProductDetailsPresenter extends BasePresenter<ProductDetailsContract.View>
     /**
      * The repository for adding the product to cart.
      */
-    private CartRepository cartRepository;
+    private final CartRepository cartRepository;
 
     /**
      * Constructs new ProductDetailsPresenter.

@@ -26,7 +26,7 @@ class ProductsPresenter extends BasePresenter<ProductsContract.View>
     /**
      * The repository for loading products.
      */
-    private ProductsRepository repository;
+    private final ProductsRepository repository;
 
     /**
      * Constructs new ProductsPresenter.

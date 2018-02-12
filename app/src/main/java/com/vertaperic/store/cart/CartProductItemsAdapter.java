@@ -29,11 +29,11 @@ class CartProductItemsAdapter extends RecyclerView.Adapter<CartProductItemsAdapt
     /**
      * The layout inflater.
      */
-    private LayoutInflater inflater;
+    private final LayoutInflater inflater;
     /**
      * The presenter for my cart screen {@link MyCartFragment}.
      */
-    private MyCartContract.Presenter presenter;
+    private final MyCartContract.Presenter presenter;
 
     /**
      * Constructs new CartProductItemsAdapter.
@@ -78,7 +78,7 @@ class CartProductItemsAdapter extends RecyclerView.Adapter<CartProductItemsAdapt
         /**
          * The binding instance for cart product list item.
          */
-        private CartProductListItemBinding binding;
+        private final CartProductListItemBinding binding;
 
         /**
          * @param binding The binding for cart product list item.

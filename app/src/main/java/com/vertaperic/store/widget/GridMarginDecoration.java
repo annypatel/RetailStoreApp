@@ -22,7 +22,7 @@ public class GridMarginDecoration extends RecyclerView.ItemDecoration {
     /**
      * The item margin.
      */
-    private int margin;
+    private final int margin;
 
     /**
      * Constructs new GridMarginDecoration.
