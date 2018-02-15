@@ -6,7 +6,6 @@
 package com.vertaperic.android.database;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.Nullable;
 
@@ -21,13 +20,6 @@ import java.util.List;
  * @author Anny Patel
  */
 public interface DatabaseController {
-
-    /**
-     * To get the context attached with this controller.
-     *
-     * @return The context.
-     */
-    Context getContext();
 
     /**
      * To get the SQLite database wrapper.

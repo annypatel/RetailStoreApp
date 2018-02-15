@@ -5,12 +5,14 @@
  */
 package com.vertaperic.android.database;
 
+import android.arch.persistence.db.SupportSQLiteDatabase;
+import android.arch.persistence.db.SupportSQLiteOpenHelper;
+import android.arch.persistence.db.SupportSQLiteQuery;
+import android.arch.persistence.db.SupportSQLiteQueryBuilder;
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -40,22 +42,17 @@ class DefaultDatabaseController implements DatabaseController {
      *
      * @param openHelper The SQLite database helper.
      */
-    DefaultDatabaseController(@NonNull BaseSQLiteOpenHelper openHelper) {
-        this(new DefaultWrapper(openHelper));
+    DefaultDatabaseController(@NonNull SupportSQLiteOpenHelper openHelper) {
+        this.wrapper = new LazyWrapper(openHelper);
     }
 
     /**
      * Constructs new DefaultDatabaseController.
      *
-     * @param wrapper The database wrapper.
+     * @param database The SQLite database.
      */
-    DefaultDatabaseController(@NonNull SQLiteDatabaseWrapper wrapper) {
-        this.wrapper = wrapper;
-    }
-
-    @Override
-    public Context getContext() {
-        return this.wrapper.getContext();
+    DefaultDatabaseController(@NonNull SupportSQLiteDatabase database) {
+        this.wrapper = new CachedWrapper(database);
     }
 
     @Override
@@ -107,7 +104,7 @@ class DefaultDatabaseController implements DatabaseController {
     public <T, M extends RowObjectMapper<T>> long insert(M mapper, T item, String table, String nullColumnHack) {
         ContentValues cv = mapper.map(item);
 
-        long id = this.wrapper.getWritableDatabase().insert(table, nullColumnHack, cv);
+        long id = this.wrapper.getWritableDatabase().insert(table, SQLiteDatabase.CONFLICT_NONE, cv);
         if (id != -1) {
             mapper.setId(item, id);
         }
@@ -122,24 +119,41 @@ class DefaultDatabaseController implements DatabaseController {
     @Override
     public <T, M extends RowObjectMapper<T>> int update(M mapper, T item, String table, String whereClause, String[] whereArgs) {
         ContentValues cv = mapper.map(item);
-        return this.wrapper.getWritableDatabase().update(table, cv, whereClause, whereArgs);
+        return this.wrapper.getWritableDatabase().update(table, SQLiteDatabase.CONFLICT_NONE, cv, whereClause, whereArgs);
     }
 
     @Override
     public <T, M extends RowObjectMapper<T>> List<T> rawQuery(M mapper, String sql, String[] selectionArg) {
-        Cursor cursor = this.wrapper.getReadableDatabase().rawQuery(sql, selectionArg);
+        Cursor cursor = this.wrapper.getReadableDatabase().query(sql, selectionArg);
         return convertCursorToList(cursor, mapper);
     }
 
     @Override
     public <T, M extends RowObjectMapper<T>> List<T> query(M mapper, String table, String[] columns, String whereSelection, String[] selectionArgs, String groupBy, String having, String orderBy, String limit) {
-        Cursor cursor = this.wrapper.getReadableDatabase().query(table, columns, whereSelection, selectionArgs, groupBy, having, orderBy, limit);
+        SupportSQLiteQuery query = SupportSQLiteQueryBuilder.builder(table)
+                .columns(columns)
+                .selection(whereSelection, selectionArgs)
+                .groupBy(groupBy)
+                .having(having)
+                .orderBy(orderBy)
+                .limit(limit)
+                .create();
+
+        Cursor cursor = this.wrapper.getReadableDatabase().query(query);
         return convertCursorToList(cursor, mapper);
     }
 
     @Override
     public <T, M extends RowObjectMapper<T>> List<T> query(M mapper, String table, String[] columns, String whereSelection, String[] selectionArgs, String groupBy, String having, String orderBy) {
-        Cursor cursor = this.wrapper.getReadableDatabase().query(table, columns, whereSelection, selectionArgs, groupBy, having, orderBy);
+        SupportSQLiteQuery query = SupportSQLiteQueryBuilder.builder(table)
+                .columns(columns)
+                .selection(whereSelection, selectionArgs)
+                .groupBy(groupBy)
+                .having(having)
+                .orderBy(orderBy)
+                .create();
+
+        Cursor cursor = this.wrapper.getReadableDatabase().query(query);
         return convertCursorToList(cursor, mapper);
     }
 
@@ -211,35 +225,57 @@ class DefaultDatabaseController implements DatabaseController {
 
     /**
      * The SQLite database wrapper, that will return readable and writable database from
-     * {@link SQLiteOpenHelper}
+     * {@link SupportSQLiteDatabase}.
      */
-    private static class DefaultWrapper implements SQLiteDatabaseWrapper {
+    private static class LazyWrapper implements SQLiteDatabaseWrapper {
 
         /**
          * The SQLite open helper.
          */
-        private final BaseSQLiteOpenHelper openHelper;
+        private final SupportSQLiteOpenHelper openHelper;
 
-        DefaultWrapper(BaseSQLiteOpenHelper openHelper) {
+        LazyWrapper(SupportSQLiteOpenHelper openHelper) {
             this.openHelper = openHelper;
         }
 
         @NonNull
         @Override
-        public Context getContext() {
-            return this.openHelper.getContext();
-        }
-
-        @NonNull
-        @Override
-        public SQLiteDatabase getWritableDatabase() {
+        public SupportSQLiteDatabase getWritableDatabase() {
             return this.openHelper.getWritableDatabase();
         }
 
         @NonNull
         @Override
-        public SQLiteDatabase getReadableDatabase() {
+        public SupportSQLiteDatabase getReadableDatabase() {
             return this.openHelper.getReadableDatabase();
+        }
+    }
+
+    /**
+     * The SQLite database wrapper that will cache the {@link SupportSQLiteDatabase} and return the
+     * same for {@link #getReadableDatabase()} and {@link #getWritableDatabase()} method.
+     */
+    private static class CachedWrapper implements SQLiteDatabaseWrapper {
+
+        /**
+         * The SQLite database.
+         */
+        private final SupportSQLiteDatabase database;
+
+        CachedWrapper(SupportSQLiteDatabase openHelper) {
+            this.database = openHelper;
+        }
+
+        @NonNull
+        @Override
+        public SupportSQLiteDatabase getWritableDatabase() {
+            return this.database;
+        }
+
+        @NonNull
+        @Override
+        public SupportSQLiteDatabase getReadableDatabase() {
+            return this.database;
         }
     }
 }

@@ -5,6 +5,11 @@
  */
 package com.vertaperic.store.category;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
 import java.io.Serializable;
 
 /**
@@ -12,26 +17,29 @@ import java.io.Serializable;
  *
  * @author Anny Patel
  */
+@Entity(tableName = "categories")
 public class Category implements Serializable {
 
     /**
      * The unique id for category.
-     * <p/>
-     * INTEGER AUTO INCREMENT PRIMARY KEY
      */
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
     private Long id;
+
     /**
      * Name of category.
-     * <p/>
-     * VARCHAR NOT NULL
      */
+    @NonNull
+    @ColumnInfo(name = "name")
     private String name;
+
     /**
      * Flag to indicate whether this category has sub categories or not.
-     * <p/>
-     * BOOLEAN - 0/1
      */
+    @ColumnInfo(name = "hasSubCategories")
     private boolean hasSubCategories;
+
     /**
      * The id of parent category.
      * <p/>
@@ -39,12 +47,13 @@ public class Category implements Serializable {
      * <p/>
      * -1 for main categories, otherwise as id
      */
+    @ColumnInfo(name = "parentCategoryId")
     private Long parentCategoryId;
+
     /**
      * The category image URI.
-     * <p/>
-     * VARCHAR NULL
      */
+    @ColumnInfo(name = "imageUri")
     private String imageUri;
 
     public Long getId() {
@@ -55,11 +64,12 @@ public class Category implements Serializable {
         this.id = id;
     }
 
+    @NonNull
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(@NonNull String name) {
         this.name = name;
     }
 

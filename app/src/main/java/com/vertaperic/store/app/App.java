@@ -5,10 +5,6 @@
  */
 package com.vertaperic.store.app;
 
-import com.vertaperic.android.database.BaseSQLiteOpenHelper;
-import com.vertaperic.android.database.DatabaseController;
-import com.vertaperic.android.database.DatabaseManager;
-
 import dagger.android.AndroidInjector;
 import dagger.android.support.DaggerApplication;
 
@@ -21,18 +17,7 @@ public class App extends DaggerApplication {
 
     @Override
     protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
-        // create SQLite helper with lifecycle listener
-        BaseSQLiteOpenHelper openHelper = DatabaseManager.newSQLiteOpenHelper(
-                this, AppDatabaseLifecycleListener.DATABASE_NAME,
-                null, AppDatabaseLifecycleListener.DATABASE_VERSION);
-        openHelper.setDatabaseLifecycleListener(new AppDatabaseLifecycleListener());
-
-        // create database controller and open the database
-        DatabaseController databaseController = DatabaseManager.newDatabaseController(openHelper);
-        databaseController.openAsync(null);
-
         return DaggerAppComponent.builder()
-                .appModule(new AppModule(databaseController))
                 .create(this);
     }
 }

@@ -152,7 +152,7 @@ public class CartItemDao extends BaseDao<CartItem> {
 
         // query database
         Cursor cursor = this.controller.getSQLiteDatabaseWrapper()
-                .getReadableDatabase().rawQuery(sql, null);
+                .getReadableDatabase().query(sql);
         double totalPrice = 0;
         if (cursor.moveToFirst()) {
             totalPrice = cursor.getDouble(0);

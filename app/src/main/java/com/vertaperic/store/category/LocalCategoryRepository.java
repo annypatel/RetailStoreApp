@@ -69,7 +69,7 @@ class LocalCategoryRepository implements CategoryRepository {
                 Simulation.sleep();
 
                 // get sub categories from database
-                return categoryDao.getSubCategories(mainCategory);
+                return categoryDao.getSubCategories(mainCategory.getId());
             }
 
             @Override

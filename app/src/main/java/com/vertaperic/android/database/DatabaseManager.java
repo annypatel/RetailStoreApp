@@ -5,9 +5,8 @@
  */
 package com.vertaperic.android.database;
 
-import android.content.Context;
-import android.database.DatabaseErrorHandler;
-import android.database.sqlite.SQLiteDatabase;
+import android.arch.persistence.db.SupportSQLiteDatabase;
+import android.arch.persistence.db.SupportSQLiteOpenHelper;
 
 /**
  * The factory for creating the SQLiteOpenHelper and DatabaseController.
@@ -23,11 +22,11 @@ public class DatabaseManager {
     /**
      * To create new database controller.
      *
-     * @param wrapper The SQLite database wrapper.
+     * @param database The SQLite database.
      * @return The database controller.
      */
-    public static DatabaseController newDatabaseController(SQLiteDatabaseWrapper wrapper) {
-        return new DefaultDatabaseController(wrapper);
+    public static DatabaseController newDatabaseController(SupportSQLiteDatabase database) {
+        return new DefaultDatabaseController(database);
     }
 
     /**
@@ -36,34 +35,7 @@ public class DatabaseManager {
      * @param openHelper The SQLite open helper.
      * @return The database controller.
      */
-    public static DatabaseController newDatabaseController(BaseSQLiteOpenHelper openHelper) {
+    public static DatabaseController newDatabaseController(SupportSQLiteOpenHelper openHelper) {
         return new DefaultDatabaseController(openHelper);
-    }
-
-    /**
-     * To create the SQLite open helper.
-     *
-     * @param context The host context.
-     * @param name    The name of database.
-     * @param factory The cursor factory.
-     * @param version The database version.
-     * @return The SQLite open helper.
-     */
-    public static BaseSQLiteOpenHelper newSQLiteOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        return new DefaultSQLiteOpenHelper(context, name, factory, version);
-    }
-
-    /**
-     * To create the SQLite open helper.
-     *
-     * @param context      The host context.
-     * @param name         The name of database.
-     * @param factory      The cursor factory.
-     * @param version      The database version.
-     * @param errorHandler The database error handler.
-     * @return The SQLite open helper.
-     */
-    public static BaseSQLiteOpenHelper newSQLiteOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version, DatabaseErrorHandler errorHandler) {
-        return new DefaultSQLiteOpenHelper(context, name, factory, version, errorHandler);
     }
 }
