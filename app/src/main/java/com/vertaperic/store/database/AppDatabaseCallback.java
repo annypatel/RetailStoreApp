@@ -12,7 +12,6 @@ import android.support.annotation.NonNull;
 import com.vertaperic.android.database.DatabaseController;
 import com.vertaperic.android.database.DatabaseManager;
 import com.vertaperic.store.cart.CartItemDao;
-import com.vertaperic.store.product.ProductDao;
 
 import javax.inject.Inject;
 
@@ -44,7 +43,6 @@ class AppDatabaseCallback extends RoomDatabase.Callback {
             controller.beginTransaction();
 
             // create tables
-            ProductDao.createTable(controller);
             CartItemDao.createTable(controller);
             // import data
             this.dataProvider.importData(controller);

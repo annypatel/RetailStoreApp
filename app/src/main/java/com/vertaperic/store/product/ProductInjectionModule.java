@@ -5,10 +5,12 @@
  */
 package com.vertaperic.store.product;
 
+import com.vertaperic.store.database.AppDatabase;
 import com.vertaperic.store.util.FragmentScoped;
 
 import dagger.Binds;
 import dagger.Module;
+import dagger.Provides;
 import dagger.android.ContributesAndroidInjector;
 
 /**
@@ -20,16 +22,28 @@ import dagger.android.ContributesAndroidInjector;
 public abstract class ProductInjectionModule {
 
     @FragmentScoped
-    @ContributesAndroidInjector(modules = Declarations.class)
+    @ContributesAndroidInjector(modules = {
+            Declarations.class,
+            Bindings.class
+    })
     abstract ProductsFragment contributeProductsFragmentInjector();
 
     @Module
-    abstract class Declarations {
+    static abstract class Declarations {
 
         @Binds
         abstract ProductsContract.Presenter provideProductsPresenter(ProductsPresenter presenter);
 
         @Binds
         abstract ProductsRepository provideProductsRepository(LocalProductsRepository repository);
+    }
+
+    @Module
+    static class Bindings {
+
+        @Provides
+        static ProductDao providesProductDao(AppDatabase database) {
+            return database.productDao();
+        }
     }
 }

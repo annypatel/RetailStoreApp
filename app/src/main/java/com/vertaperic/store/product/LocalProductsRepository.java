@@ -47,7 +47,7 @@ class LocalProductsRepository implements ProductsRepository {
                 Simulation.sleep();
 
                 // get products for category
-                return productDao.getProducts(category);
+                return productDao.getProducts(category.getId());
             }
 
             @Override

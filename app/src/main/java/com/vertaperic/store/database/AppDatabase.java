@@ -10,6 +10,8 @@ import android.arch.persistence.room.RoomDatabase;
 
 import com.vertaperic.store.category.Category;
 import com.vertaperic.store.category.CategoryDao;
+import com.vertaperic.store.product.Product;
+import com.vertaperic.store.product.ProductDao;
 
 /**
  * Room database class for this app.
@@ -17,7 +19,8 @@ import com.vertaperic.store.category.CategoryDao;
  * @author Anny Patel
  */
 @Database(version = AppDatabase.VERSION, entities = {
-        Category.class
+        Category.class,
+        Product.class
 })
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -41,4 +44,9 @@ public abstract class AppDatabase extends RoomDatabase {
      * @return The category dao.
      */
     public abstract CategoryDao categoryDao();
+
+    /**
+     * @return The product dao.
+     */
+    public abstract ProductDao productDao();
 }
