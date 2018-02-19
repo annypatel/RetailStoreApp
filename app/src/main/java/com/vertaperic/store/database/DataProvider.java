@@ -5,10 +5,10 @@
  */
 package com.vertaperic.store.database;
 
+import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.vertaperic.android.database.DatabaseController;
 import com.vertaperic.store.app.App;
 
 import java.io.IOException;
@@ -38,14 +38,14 @@ class DataProvider {
     /**
      * To import the data from sql file to database.
      *
-     * @param controller The database controller.
+     * @param database SQLite database instance.
      */
-    void importData(@NonNull DatabaseController controller) {
+    void importData(@NonNull SupportSQLiteDatabase database) {
 
         // import category data
         try {
             InputStream is = this.app.getAssets().open("sql/categories.sql");
-            controller.importSQLStatements(is);
+            DatabaseUtils.importSQLStatements(database, is);
         } catch (IOException e) {
             Log.e("DataProvider", "unable to import category data", e);
         }
@@ -54,7 +54,7 @@ class DataProvider {
         // import product data
         try {
             InputStream is = this.app.getAssets().open("sql/products.sql");
-            controller.importSQLStatements(is);
+            DatabaseUtils.importSQLStatements(database, is);
         } catch (IOException e) {
             Log.e("DataProvider", "unable to import product data", e);
         }

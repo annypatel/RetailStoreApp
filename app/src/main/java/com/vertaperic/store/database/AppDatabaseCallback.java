@@ -9,9 +9,6 @@ import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.RoomDatabase;
 import android.support.annotation.NonNull;
 
-import com.vertaperic.android.database.DatabaseController;
-import com.vertaperic.android.database.DatabaseManager;
-
 import javax.inject.Inject;
 
 /**
@@ -37,16 +34,15 @@ class AppDatabaseCallback extends RoomDatabase.Callback {
     public void onCreate(@NonNull SupportSQLiteDatabase database) {
         super.onCreate(database);
 
-        DatabaseController controller = DatabaseManager.newDatabaseController(database);
         try {
-            controller.beginTransaction();
+            database.beginTransaction();
 
             // import data
-            this.dataProvider.importData(controller);
+            this.dataProvider.importData(database);
 
-            controller.setTransactionSuccessful();
+            database.setTransactionSuccessful();
         } finally {
-            controller.endTransaction();
+            database.endTransaction();
         }
     }
 }

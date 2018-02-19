@@ -7,8 +7,6 @@ package com.vertaperic.store.database;
 
 import android.arch.persistence.room.Room;
 
-import com.vertaperic.android.database.DatabaseController;
-import com.vertaperic.android.database.DatabaseManager;
 import com.vertaperic.store.app.App;
 
 import javax.inject.Singleton;
@@ -35,17 +33,5 @@ public class DatabaseModule {
         return Room.databaseBuilder(app, AppDatabase.class, AppDatabase.NAME)
                 .addCallback(listener)
                 .build();
-    }
-
-    /**
-     * @param database The application database instance.
-     * @return The database controller.
-     */
-    @Provides
-    @Singleton
-    static DatabaseController provideDatabaseController(AppDatabase database) {
-        DatabaseController databaseController = DatabaseManager.newDatabaseController(database.getOpenHelper());
-        databaseController.openAsync(null);
-        return databaseController;
     }
 }
