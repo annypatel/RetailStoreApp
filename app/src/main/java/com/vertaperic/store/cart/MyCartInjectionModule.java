@@ -5,10 +5,12 @@
  */
 package com.vertaperic.store.cart;
 
+import com.vertaperic.store.database.AppDatabase;
 import com.vertaperic.store.util.FragmentScoped;
 
 import dagger.Binds;
 import dagger.Module;
+import dagger.Provides;
 import dagger.android.ContributesAndroidInjector;
 
 /**
@@ -20,16 +22,28 @@ import dagger.android.ContributesAndroidInjector;
 public abstract class MyCartInjectionModule {
 
     @FragmentScoped
-    @ContributesAndroidInjector(modules = Declarations.class)
+    @ContributesAndroidInjector(modules = {
+            Declarations.class,
+            Bindings.class
+    })
     abstract MyCartFragment contributeMyCartFragmentInjector();
 
     @Module
-    abstract class Declarations {
+    static abstract class Declarations {
 
         @Binds
         abstract MyCartContract.Presenter bindsMyCartPresenter(MyCartPresenter presenter);
 
         @Binds
         abstract CartRepository bindsCartRepository(LocalCartRepository repository);
+    }
+
+    @Module
+    static class Bindings {
+
+        @Provides
+        static CartItemDao providesCartItemDao(AppDatabase database) {
+            return database.cartItemDao();
+        }
     }
 }

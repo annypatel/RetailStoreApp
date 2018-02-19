@@ -5,6 +5,10 @@
  */
 package com.vertaperic.store.cart;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
 import java.io.Serializable;
 
 /**
@@ -12,19 +16,22 @@ import java.io.Serializable;
  *
  * @author Anny Patel
  */
+@Entity(tableName = "cart")
 public class CartItem implements Serializable {
 
     /**
      * The unique id for each cart items.
-     * <p/>
-     * INTEGER AUTO INCREMENT PRIMARY KEY
      */
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "cartItemId")
     private Long cartItemId;
+
     /**
      * The product id in products table.
      * <p/>
      * INTEGER FOREIGN KEY products(id) NOT NULL
      */
+    @ColumnInfo(name = "productId")
     private Long productId;
 
     public Long getCartItemId() {

@@ -5,6 +5,8 @@
  */
 package com.vertaperic.store.cart;
 
+import android.arch.persistence.room.Embedded;
+
 import com.vertaperic.store.product.Product;
 
 /**
@@ -17,10 +19,12 @@ public class CartProductItem {
     /**
      * The cart item for the product.
      */
+    @Embedded
     private final CartItem cartItem;
     /**
      * The product added in the cart.
      */
+    @Embedded
     private final Product product;
 
     /**

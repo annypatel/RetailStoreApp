@@ -77,7 +77,10 @@ public class LocalCartRepository implements CartRepository {
             protected CartItem doInBackground(Void... params) {
                 Simulation.sleep();
 
-                return cartItemDao.addProductToCart(product);
+                CartItem cartItem = new CartItem();
+                cartItem.setProductId(product.getId());
+                cartItemDao.addCartItem(cartItem);
+                return cartItem;
             }
 
             @Override
@@ -101,7 +104,8 @@ public class LocalCartRepository implements CartRepository {
             protected Boolean doInBackground(Void... params) {
                 Simulation.sleep();
 
-                return cartItemDao.removeProductFromCart(cartProductItem);
+                int count = cartItemDao.removeCardItem(cartProductItem.getCartItem());
+                return count > 0;
             }
 
             @Override
@@ -125,7 +129,7 @@ public class LocalCartRepository implements CartRepository {
             protected CartItem doInBackground(Void... params) {
                 Simulation.sleep();
 
-                return cartItemDao.getCartItem(product);
+                return cartItemDao.getCartItem(product.getId());
             }
 
             @Override

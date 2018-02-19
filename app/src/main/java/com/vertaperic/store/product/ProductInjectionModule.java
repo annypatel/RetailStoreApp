@@ -5,6 +5,7 @@
  */
 package com.vertaperic.store.product;
 
+import com.vertaperic.store.cart.CartItemDao;
 import com.vertaperic.store.database.AppDatabase;
 import com.vertaperic.store.util.FragmentScoped;
 
@@ -44,6 +45,11 @@ public abstract class ProductInjectionModule {
         @Provides
         static ProductDao providesProductDao(AppDatabase database) {
             return database.productDao();
+        }
+
+        @Provides
+        static CartItemDao providesCartItemDao(AppDatabase database) {
+            return database.cartItemDao();
         }
     }
 }

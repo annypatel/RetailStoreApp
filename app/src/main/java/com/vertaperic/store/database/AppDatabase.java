@@ -8,6 +8,8 @@ package com.vertaperic.store.database;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.RoomDatabase;
 
+import com.vertaperic.store.cart.CartItem;
+import com.vertaperic.store.cart.CartItemDao;
 import com.vertaperic.store.category.Category;
 import com.vertaperic.store.category.CategoryDao;
 import com.vertaperic.store.product.Product;
@@ -20,7 +22,8 @@ import com.vertaperic.store.product.ProductDao;
  */
 @Database(version = AppDatabase.VERSION, entities = {
         Category.class,
-        Product.class
+        Product.class,
+        CartItem.class
 })
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -49,4 +52,9 @@ public abstract class AppDatabase extends RoomDatabase {
      * @return The product dao.
      */
     public abstract ProductDao productDao();
+
+    /**
+     * @return The cart item dao.
+     */
+    public abstract CartItemDao cartItemDao();
 }
