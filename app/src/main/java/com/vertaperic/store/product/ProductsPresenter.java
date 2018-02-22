@@ -7,10 +7,9 @@ package com.vertaperic.store.product;
 
 import android.support.annotation.NonNull;
 
+import com.vertaperic.store.app.RxSchedulers;
 import com.vertaperic.store.category.Category;
 import com.vertaperic.store.mvp.BasePresenter;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -24,6 +23,10 @@ class ProductsPresenter extends BasePresenter<ProductsContract.View>
         implements ProductsContract.Presenter {
 
     /**
+     * Provider for reactive schedulers.
+     */
+    private final RxSchedulers schedulers;
+    /**
      * The repository for loading products.
      */
     private final ProductsRepository repository;
@@ -31,39 +34,33 @@ class ProductsPresenter extends BasePresenter<ProductsContract.View>
     /**
      * Constructs new ProductsPresenter.
      *
+     * @param schedulers Provider for reactive schedulers.
      * @param repository The repository for loading products.
      */
     @Inject
-    ProductsPresenter(@NonNull ProductsRepository repository) {
+    ProductsPresenter(@NonNull RxSchedulers schedulers,
+                      @NonNull ProductsRepository repository) {
+        this.schedulers = schedulers;
         this.repository = repository;
     }
 
     @Override
     public void loadProducts(@NonNull Category category) {
         view().setLoadingIndicator(true);
-
-        // create loading callback
-        ProductsRepository.LoadProductsCallback callback = new ProductsRepository.LoadProductsCallback() {
-
-            @Override
-            public void onProductsLoaded(@NonNull List<Product> products) {
-                if (isAttached()) {
-                    view().setLoadingIndicator(false);
-                    view().showProducts(products);
-                }
-            }
-
-            @Override
-            public void onDataNotAvailable() {
-                if (isAttached()) {
-                    view().setLoadingIndicator(false);
-                    view().showProductsNotAvailable();
-                }
-            }
-        };
-
         // get products from repository
-        this.repository.getProducts(category, callback);
+        this.repository
+                .getProducts(category)
+                .subscribeOn(schedulers.io())
+                .observeOn(schedulers.mainThread())
+                .subscribe((products) -> {
+
+                    view().setLoadingIndicator(false);
+                    if (products.isEmpty()) {
+                        view().showProductsNotAvailable();
+                    } else {
+                        view().showProducts(products);
+                    }
+                });
     }
 
     @Override

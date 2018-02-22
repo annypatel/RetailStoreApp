@@ -5,15 +5,15 @@
  */
 package com.vertaperic.store.product;
 
-import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
 import com.vertaperic.store.category.Category;
-import com.vertaperic.store.util.Simulation;
 
 import java.util.List;
 
 import javax.inject.Inject;
+
+import io.reactivex.Single;
 
 /**
  * Concrete implementation of {@link ProductsRepository} which uses local database as data source.
@@ -37,28 +37,8 @@ class LocalProductsRepository implements ProductsRepository {
         this.productDao = productDao;
     }
 
-
     @Override
-    public void getProducts(@NonNull final Category category, @NonNull final LoadProductsCallback callback) {
-        new AsyncTask<Void, Void, List<Product>>() {
-
-            @Override
-            protected List<Product> doInBackground(Void... params) {
-                Simulation.sleep();
-
-                // get products for category
-                return productDao.getProducts(category.getId());
-            }
-
-            @Override
-            protected void onPostExecute(List<Product> products) {
-                if (products.isEmpty()) {
-                    callback.onDataNotAvailable();
-                } else {
-                    callback.onProductsLoaded(products);
-                }
-            }
-
-        }.execute();
+    public Single<List<Product>> getProducts(@NonNull Category category) {
+        return this.productDao.getProducts(category.getId());
     }
 }

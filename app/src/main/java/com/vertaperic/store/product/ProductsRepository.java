@@ -11,6 +11,8 @@ import com.vertaperic.store.category.Category;
 
 import java.util.List;
 
+import io.reactivex.Single;
+
 /**
  * The main entry point for accessing products data.
  *
@@ -22,25 +24,7 @@ public interface ProductsRepository {
      * To get products for given category.
      *
      * @param category The category.
-     * @param callback The lading callback.
+     * @return Single of products for given category.
      */
-    void getProducts(@NonNull Category category, @NonNull LoadProductsCallback callback);
-
-    /**
-     * The callback for loading products.
-     */
-    interface LoadProductsCallback {
-
-        /**
-         * Called when products are loaded.
-         *
-         * @param products The loaded products.
-         */
-        void onProductsLoaded(@NonNull List<Product> products);
-
-        /**
-         * Called if no products are available.
-         */
-        void onDataNotAvailable();
-    }
+    Single<List<Product>> getProducts(@NonNull Category category);
 }

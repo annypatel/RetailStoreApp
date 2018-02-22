@@ -10,6 +10,8 @@ import android.arch.persistence.room.Query;
 
 import java.util.List;
 
+import io.reactivex.Single;
+
 /**
  * The data access object for the {@link Product}.
  *
@@ -22,8 +24,8 @@ public interface ProductDao {
      * To get products for category.
      *
      * @param categoryId The id of category to get product for.
-     * @return The list of products.
+     * @return Single for list of products.
      */
     @Query("SELECT * FROM products WHERE categoryId = :categoryId")
-    List<Product> getProducts(Long categoryId);
+    Single<List<Product>> getProducts(Long categoryId);
 }
