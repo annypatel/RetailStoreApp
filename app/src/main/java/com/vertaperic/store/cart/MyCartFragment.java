@@ -5,7 +5,6 @@
  */
 package com.vertaperic.store.cart;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -121,13 +120,10 @@ public class MyCartFragment extends BaseFragment<MyCartContract.Presenter>
         new AlertDialog.Builder(getContext())
                 .setTitle(R.string.my_cart_remove_confirm_title)
                 .setMessage(R.string.my_cart_remove_confirm_message)
-                .setPositiveButton(R.string.my_cart_button_remove, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // remove now
-                        CartProductItems cartProductItems = binding.getCartProductItems();
-                        presenter().removeProductFromCart(cartProductItems, cartProductItem);
-                    }
+                .setPositiveButton(R.string.my_cart_button_remove, (dialog, which) -> {
+                    // remove now
+                    CartProductItems cartProductItems = binding.getCartProductItems();
+                    presenter().removeProductFromCart(cartProductItems, cartProductItem);
                 })
                 .setNegativeButton(R.string.my_cart_button_cancel, null)
                 .create()

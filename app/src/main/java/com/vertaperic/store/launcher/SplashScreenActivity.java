@@ -37,17 +37,13 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         // post runnable to start home activity with the SPLASH_TIME delay
         new Handler().postDelayed(
-                new Runnable() {
+                () -> {
 
-                    @Override
-                    public void run() {
-
-                        if (isResumed()) {
-                            startActivity(new Intent(SplashScreenActivity.this, HomeActivity.class));
-                        }
-                        finish();
-                        overridePendingTransition(R.anim.anim_fade_in, R.anim.anim_fade_out);
+                    if (isResumed()) {
+                        startActivity(new Intent(SplashScreenActivity.this, HomeActivity.class));
                     }
+                    finish();
+                    overridePendingTransition(R.anim.anim_fade_in, R.anim.anim_fade_out);
                 },
                 SPLASH_TIME);
     }

@@ -75,12 +75,7 @@ public interface NavigationItemSelectionCallback {
             @Override
             public boolean onNavigationItemSelected(@NonNull final MenuItem item) {
                 boolean checked = this.listener.shouldCheckedNavigationItem(item);
-                this.handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        listener.onNavigationItemSelected(item);
-                    }
-                }, 300);
+                this.handler.postDelayed(() -> listener.onNavigationItemSelected(item), 300);
                 return checked;
             }
         }

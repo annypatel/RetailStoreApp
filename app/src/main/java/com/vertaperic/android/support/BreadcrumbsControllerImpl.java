@@ -38,12 +38,7 @@ class BreadcrumbsControllerImpl extends BreadcrumbsController {
         this.breadcrumbsView = breadcrumbsView;
 
         // add on breadcrumb click listener
-        this.breadcrumbsView.setOnBreadcrumbClickListener(new BreadcrumbsView.OnBreadcrumbClickListener() {
-            @Override
-            public void onBreadcrumbClick(BreadcrumbSectionView sectionView) {
-                handleBreadcrumbClick(sectionView);
-            }
-        });
+        this.breadcrumbsView.setOnBreadcrumbClickListener(this::handleBreadcrumbClick);
     }
 
     @Override

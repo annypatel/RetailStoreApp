@@ -207,18 +207,14 @@ public class BreadcrumbsView extends HorizontalScrollView implements View.OnClic
      * @param smooth      true for smooth scrolling false otherwise.
      */
     private void scrollTo(final BreadcrumbSectionView sectionView, final boolean smooth) {
-        post(new Runnable() {
+        post(() -> {
 
-            @Override
-            public void run() {
-
-                int padding = getWidth() - sectionView.getWidth() - (sectionView.getPaddingRight() * 2);
-                setPadding(getPaddingLeft(), getPaddingTop(), padding, getPaddingBottom());
-                if (smooth)
-                    smoothScrollTo(sectionView.getRight(), 0);
-                else
-                    scrollTo(sectionView.getRight(), 0);
-            }
+            int padding = getWidth() - sectionView.getWidth() - (sectionView.getPaddingRight() * 2);
+            setPadding(getPaddingLeft(), getPaddingTop(), padding, getPaddingBottom());
+            if (smooth)
+                smoothScrollTo(sectionView.getRight(), 0);
+            else
+                scrollTo(sectionView.getRight(), 0);
         });
     }
 

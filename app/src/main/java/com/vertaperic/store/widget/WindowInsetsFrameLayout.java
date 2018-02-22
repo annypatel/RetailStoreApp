@@ -9,9 +9,7 @@ import android.content.Context;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.view.ViewCompat;
-import android.support.v4.view.WindowInsetsCompat;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.FrameLayout;
 
 /**
@@ -45,20 +43,16 @@ public class WindowInsetsFrameLayout extends FrameLayout {
      * To apply window inset listener.
      */
     private void applyOnApplyWindowInsetsListener() {
-        ViewCompat.setOnApplyWindowInsetsListener(this, new android.support.v4.view.OnApplyWindowInsetsListener() {
+        ViewCompat.setOnApplyWindowInsetsListener(this, (v, insets) -> {
 
-            @Override
-            public WindowInsetsCompat onApplyWindowInsets(View v, WindowInsetsCompat insets) {
-
-                boolean consumed = false;
-                for (int i = 0, count = getChildCount(); i < count; i++) {
-                    ViewCompat.dispatchApplyWindowInsets(getChildAt(i), insets);
-                    if (insets.isConsumed()) {
-                        consumed = true;
-                    }
+            boolean consumed = false;
+            for (int i = 0, count = getChildCount(); i < count; i++) {
+                ViewCompat.dispatchApplyWindowInsets(getChildAt(i), insets);
+                if (insets.isConsumed()) {
+                    consumed = true;
                 }
-                return consumed ? insets.consumeSystemWindowInsets() : insets;
             }
+            return consumed ? insets.consumeSystemWindowInsets() : insets;
         });
     }
 }
