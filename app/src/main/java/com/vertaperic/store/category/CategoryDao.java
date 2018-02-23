@@ -10,6 +10,8 @@ import android.arch.persistence.room.Query;
 
 import java.util.List;
 
+import io.reactivex.Single;
+
 /**
  * The data access object for the {@link Category}.
  *
@@ -21,17 +23,17 @@ public interface CategoryDao {
     /**
      * To get main categories(categories with no parent has -1 as parentCategoryId).
      *
-     * @return The list of main categories.
+     * @return The Single of list of main categories.
      */
     @Query("SELECT * FROM categories WHERE parentCategoryId = -1")
-    List<Category> getMainCategories();
+    Single<List<Category>> getMainCategories();
 
     /**
      * To get the sub categories.
      *
      * @param mainCategoryId The main category id.
-     * @return The list of sub categories.
+     * @return The Single of list of sub categories.
      */
     @Query("SELECT * FROM categories WHERE parentCategoryId = :mainCategoryId")
-    List<Category> getSubCategories(Long mainCategoryId);
+    Single<List<Category>> getSubCategories(Long mainCategoryId);
 }

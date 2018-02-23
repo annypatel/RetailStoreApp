@@ -9,6 +9,8 @@ import android.support.annotation.NonNull;
 
 import java.util.List;
 
+import io.reactivex.Single;
+
 /**
  * The main entry point for accessing categories data.
  *
@@ -19,33 +21,15 @@ public interface CategoryRepository {
     /**
      * To get the main categories.
      *
-     * @param callback The loading callback.
+     * @return Single of list of category.
      */
-    void getMainCategories(@NonNull LoadCategoriesCallback callback);
+    Single<List<Category>> getMainCategories();
 
     /**
      * To get the sub categories for given main category.
      *
      * @param mainCategory The main category.
-     * @param callback     The loading callback.
+     * @return Single of list of category.
      */
-    void getSubCategories(@NonNull Category mainCategory, @NonNull LoadCategoriesCallback callback);
-
-    /**
-     * The callback for loading categories.
-     */
-    interface LoadCategoriesCallback {
-
-        /**
-         * Called when categories are loaded.
-         *
-         * @param categories The loaded categories.
-         */
-        void onCategoriesLoaded(@NonNull List<Category> categories);
-
-        /**
-         * Called if no categories are available.
-         */
-        void onDataNotAvailable();
-    }
+    Single<List<Category>> getSubCategories(@NonNull Category mainCategory);
 }
