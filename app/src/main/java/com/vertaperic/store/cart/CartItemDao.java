@@ -12,13 +12,26 @@ import android.arch.persistence.room.Query;
 
 import java.util.List;
 
+import io.reactivex.Completable;
+import io.reactivex.Single;
+
 /**
  * The data access object for cart items.
  *
  * @author Anny Patel
  */
 @Dao
-public interface CartItemDao {
+public abstract class CartItemDao {
+
+    /**
+     * To add item to cart.
+     *
+     * @param cartItem The cart item to add.
+     * @return Completable for adding item to cart table.
+     */
+    Completable addCartItem(CartItem cartItem) {
+        return Completable.fromRunnable(() -> internalAddCartItem(cartItem));
+    }
 
     /**
      * To add item to cart.
@@ -26,16 +39,17 @@ public interface CartItemDao {
      * @param cartItem The cart item to add.
      */
     @Insert
-    void addCartItem(CartItem cartItem);
+    protected abstract void internalAddCartItem(CartItem cartItem);
 
     /**
-     * To get cart item for given product id.
+     * To remove item from cart.
      *
-     * @param productId The product id.
-     * @return The cart item if found, null otherwise.
+     * @param cartItem The cart item to remove.
+     * @return Single of the number of row removed.
      */
-    @Query("SELECT * FROM cart WHERE productId = :productId")
-    CartItem getCartItem(Long productId);
+    Single<Integer> removeCardItem(CartItem cartItem) {
+        return Single.fromCallable(() -> internalRemoveCardItem(cartItem));
+    }
 
     /**
      * To remove item from cart.
@@ -44,21 +58,22 @@ public interface CartItemDao {
      * @return Number of row removed.
      */
     @Delete
-    int removeCardItem(CartItem cartItem);
+    protected abstract int internalRemoveCardItem(CartItem cartItem);
+
+    /**
+     * To get cart item for given product id.
+     *
+     * @param productId The product id.
+     * @return Single of the cart item.
+     */
+    @Query("SELECT * FROM cart WHERE productId = :productId")
+    abstract Single<CartItem> getCartItem(Long productId);
 
     /**
      * To get the products added in cart.
      *
-     * @return The list of cart product items.
+     * @return Single of the list of cart product items.
      */
     @Query("SELECT products.*, cart.* FROM products, cart WHERE products.id = cart.productId")
-    List<CartProductItem> getProductsInCart();
-
-    /**
-     * To get the sum of price of products added in cart.
-     *
-     * @return The total price.
-     */
-    @Query("SELECT sum(products.price) FROM products, cart WHERE products.id = cart.productId")
-    double getTotalPrice();
+    abstract Single<List<CartProductItem>> getProductsInCart();
 }

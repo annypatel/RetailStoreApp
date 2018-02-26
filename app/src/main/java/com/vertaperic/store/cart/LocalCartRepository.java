@@ -5,16 +5,14 @@
  */
 package com.vertaperic.store.cart;
 
-import android.os.AsyncTask;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import com.vertaperic.store.product.Product;
-import com.vertaperic.store.util.Simulation;
-
-import java.util.List;
 
 import javax.inject.Inject;
+
+import io.reactivex.Observable;
+import io.reactivex.Single;
 
 /**
  * @author Anny Patel
@@ -37,110 +35,33 @@ public class LocalCartRepository implements CartRepository {
     }
 
     @Override
-    public void getCartProductItems(@NonNull final GetCartProductItemsCallback callback) {
-        new AsyncTask<Void, Void, CartProductItems>() {
+    public Single<CartProductItems> getCartProductItems() {
+        return cartItemDao
+                .getProductsInCart()
+                .flatMap(cartProductItems ->
 
-            @Override
-            @Nullable
-            protected CartProductItems doInBackground(Void... params) {
-                Simulation.sleep();
-
-                List<CartProductItem> products = cartItemDao.getProductsInCart();
-                // if no items found
-                if (products.isEmpty()) {
-                    return null;
-                }
-
-                // else get total price
-                double price = cartItemDao.getTotalPrice();
-                return new CartProductItems(products, price);
-            }
-
-            @Override
-            protected void onPostExecute(@Nullable CartProductItems cartProductItems) {
-                if (cartProductItems == null) {
-                    callback.onDataNotAvailable();
-                } else {
-                    callback.onCartProductItemsLoaded(cartProductItems);
-                }
-            }
-
-        }.execute();
+                        Observable.fromIterable(cartProductItems)
+                                .reduce(0d, (sum, cartProductItem) -> sum + cartProductItem.getProduct().getPrice())
+                                .map(sum -> new CartProductItems(cartProductItems, sum))
+                );
     }
 
     @Override
-    public void addProductToCart(@NonNull final Product product, @NonNull final AddProductToCartCallback callback) {
-        new AsyncTask<Void, Void, CartItem>() {
-
-            @Override
-            @Nullable
-            protected CartItem doInBackground(Void... params) {
-                Simulation.sleep();
-
-                CartItem cartItem = new CartItem();
-                cartItem.setProductId(product.getId());
-                cartItemDao.addCartItem(cartItem);
-                return cartItem;
-            }
-
-            @Override
-            protected void onPostExecute(@Nullable CartItem cartItem) {
-                if (cartItem == null) {
-                    callback.onFailure(product);
-                } else {
-                    callback.onProductAddedToCart(product, cartItem);
-                }
-            }
-
-        }.execute();
+    public Single<CartItem> addProductToCart(@NonNull final Product product) {
+        CartItem cartItem = new CartItem();
+        cartItem.setProductId(product.getId());
+        return cartItemDao
+                .addCartItem(cartItem)
+                .toSingle(() -> cartItem);
     }
 
     @Override
-    public void removeProductFromCart(@NonNull final CartProductItem cartProductItem, @NonNull final RemoveProductFromCartCallback callback) {
-        new AsyncTask<Void, Void, Boolean>() {
-
-            @Override
-            @NonNull
-            protected Boolean doInBackground(Void... params) {
-                Simulation.sleep();
-
-                int count = cartItemDao.removeCardItem(cartProductItem.getCartItem());
-                return count > 0;
-            }
-
-            @Override
-            protected void onPostExecute(@NonNull Boolean deleted) {
-                if (deleted) {
-                    callback.onProductRemoved(cartProductItem);
-                } else {
-                    callback.onFailure(cartProductItem);
-                }
-            }
-
-        }.execute();
+    public Single<Integer> removeProductFromCart(@NonNull final CartProductItem cartProductItem) {
+        return cartItemDao.removeCardItem(cartProductItem.getCartItem());
     }
 
     @Override
-    public void getCartItem(@NonNull final Product product, @NonNull final GetCartItemCallback callback) {
-        new AsyncTask<Void, Void, CartItem>() {
-
-            @Override
-            @Nullable
-            protected CartItem doInBackground(Void... params) {
-                Simulation.sleep();
-
-                return cartItemDao.getCartItem(product.getId());
-            }
-
-            @Override
-            protected void onPostExecute(@Nullable CartItem cartItem) {
-                if (cartItem == null) {
-                    callback.onCartItemNotFound(product);
-                } else {
-                    callback.onCartItemFound(product, cartItem);
-                }
-            }
-
-        }.execute();
+    public Single<CartItem> getCartItem(@NonNull final Product product) {
+        return cartItemDao.getCartItem(product.getId());
     }
 }

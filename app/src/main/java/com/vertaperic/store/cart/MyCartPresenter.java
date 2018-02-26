@@ -7,6 +7,7 @@ package com.vertaperic.store.cart;
 
 import android.support.annotation.NonNull;
 
+import com.vertaperic.store.app.RxSchedulers;
 import com.vertaperic.store.mvp.BasePresenter;
 
 import java.util.List;
@@ -23,6 +24,10 @@ class MyCartPresenter extends BasePresenter<MyCartContract.View>
         implements MyCartContract.Presenter {
 
     /**
+     * Provider for the reactive schedulers.
+     */
+    private final RxSchedulers schedulers;
+    /**
      * The repository for accessing cart data.
      */
     private final CartRepository repository;
@@ -30,10 +35,13 @@ class MyCartPresenter extends BasePresenter<MyCartContract.View>
     /**
      * Constructs new MyCartPresenter.
      *
+     * @param schedulers Provider for the reactive schedulers.
      * @param repository The repository for accessing cart data.
      */
     @Inject
-    MyCartPresenter(@NonNull CartRepository repository) {
+    MyCartPresenter(@NonNull RxSchedulers schedulers,
+                    @NonNull CartRepository repository) {
+        this.schedulers = schedulers;
         this.repository = repository;
     }
 
@@ -46,28 +54,25 @@ class MyCartPresenter extends BasePresenter<MyCartContract.View>
     public void loadCartProductItems() {
         view().setLoadingIndicator(true);
 
-        // create a callback
-        CartRepository.GetCartProductItemsCallback callback = new CartRepository.GetCartProductItemsCallback() {
-
-            @Override
-            public void onCartProductItemsLoaded(@NonNull CartProductItems cartProductItems) {
-                if (isAttached()) {
-                    view().setLoadingIndicator(false);
-                    view().showCartProductItems(cartProductItems);
-                }
-            }
-
-            @Override
-            public void onDataNotAvailable() {
-                if (isAttached()) {
-                    view().setLoadingIndicator(false);
-                    view().showCartIsEmpty();
-                }
-            }
-        };
-
         // get cart product items
-        this.repository.getCartProductItems(callback);
+        this.repository
+                .getCartProductItems()
+                .subscribeOn(schedulers.io())
+                .observeOn(schedulers.mainThread())
+                .subscribe(cartProductItems ->
+                        {
+                            view().setLoadingIndicator(false);
+                            if (cartProductItems.getCartProductItems().isEmpty()) {
+                                view().showCartIsEmpty();
+                            } else {
+                                view().showCartProductItems(cartProductItems);
+                            }
+                        },
+                        t -> {
+                            view().setLoadingIndicator(false);
+                            view().showCartIsEmpty();
+                        }
+                );
     }
 
     @Override
@@ -82,28 +87,23 @@ class MyCartPresenter extends BasePresenter<MyCartContract.View>
 
     @Override
     public void removeProductFromCart(@NonNull final CartProductItems cartProductItems, @NonNull CartProductItem cartProductItem) {
-        // create the callback
-        CartRepository.RemoveProductFromCartCallback cartCallback = new CartRepository.RemoveProductFromCartCallback() {
-
-            @Override
-            public void onProductRemoved(@NonNull CartProductItem cartProductItem) {
-                if (isAttached()) {
-                    view().showProductRemovedFromCart(cartProductItem);
-                    refreshCartProductItems(cartProductItems, cartProductItem);
-                }
-
-            }
-
-            @Override
-            public void onFailure(@NonNull CartProductItem cartProductItem) {
-                if (isAttached()) {
-                    view().showRemovalFromCartFailed(cartProductItem);
-                }
-            }
-        };
-
         // remove product from cart
-        this.repository.removeProductFromCart(cartProductItem, cartCallback);
+        this.repository
+                .removeProductFromCart(cartProductItem)
+                .map(count -> count > 0)
+                .subscribeOn(schedulers.io())
+                .observeOn(schedulers.mainThread())
+                .subscribe(
+                        deleted -> {
+                            if (deleted) {
+                                view().showProductRemovedFromCart(cartProductItem);
+                                refreshCartProductItems(cartProductItems, cartProductItem);
+                            } else {
+                                view().showRemovalFromCartFailed(cartProductItem);
+                            }
+                        },
+                        t -> view().showRemovalFromCartFailed(cartProductItem)
+                );
     }
 
     /**

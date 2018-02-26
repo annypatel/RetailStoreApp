@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.view.MenuItem;
 
 import com.vertaperic.store.R;
+import com.vertaperic.store.app.RxSchedulers;
 import com.vertaperic.store.cart.CartItem;
 import com.vertaperic.store.cart.CartRepository;
 import com.vertaperic.store.mvp.BasePresenter;
@@ -27,6 +28,10 @@ class ProductDetailsPresenter extends BasePresenter<ProductDetailsContract.View>
         implements ProductDetailsContract.Presenter {
 
     /**
+     * Provider for reactive scheduler.
+     */
+    private final RxSchedulers schedulers;
+    /**
      * The repository for adding the product to cart.
      */
     private final CartRepository cartRepository;
@@ -34,10 +39,13 @@ class ProductDetailsPresenter extends BasePresenter<ProductDetailsContract.View>
     /**
      * Constructs new ProductDetailsPresenter.
      *
+     * @param schedulers     Provider for reactive scheduler.
      * @param cartRepository The repository for adding product to cart.
      */
     @Inject
-    ProductDetailsPresenter(@NonNull CartRepository cartRepository) {
+    ProductDetailsPresenter(@NonNull RxSchedulers schedulers,
+                            @NonNull CartRepository cartRepository) {
+        this.schedulers = schedulers;
         this.cartRepository = cartRepository;
     }
 
@@ -65,51 +73,33 @@ class ProductDetailsPresenter extends BasePresenter<ProductDetailsContract.View>
 
         // else get cart item from repository
         view().setLoadingIndicator(true);
-        // create the callback
-        CartRepository.GetCartItemCallback callback = new CartRepository.GetCartItemCallback() {
-
-            @Override
-            public void onCartItemFound(@NonNull Product product, @NonNull CartItem cartItem) {
-                if (isAttached()) {
-                    view().setLoadingIndicator(false);
-                    view().showProductDetails(product, cartItem);
-                }
-            }
-
-            @Override
-            public void onCartItemNotFound(@NonNull Product product) {
-                if (isAttached()) {
-                    view().setLoadingIndicator(false);
-                    view().showProductDetails(product, null);
-                }
-            }
-        };
-
         // get cart item for product
-        this.cartRepository.getCartItem(product, callback);
+        this.cartRepository
+                .getCartItem(product)
+                .subscribeOn(schedulers.io())
+                .observeOn(schedulers.mainThread())
+                .subscribe(
+                        item -> {
+                            view().setLoadingIndicator(false);
+                            view().showProductDetails(product, item);
+                        },
+                        t -> {
+                            view().setLoadingIndicator(false);
+                            view().showProductDetails(product, null);
+                        }
+                );
     }
 
     @Override
     public void addProductToCart(@NonNull Product product) {
-        // create the callback
-        CartRepository.AddProductToCartCallback callback = new CartRepository.AddProductToCartCallback() {
-
-            @Override
-            public void onProductAddedToCart(@NonNull Product product, @NonNull CartItem cartItem) {
-                if (isAttached()) {
-                    view().showProductAddedToCart(product, cartItem);
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Product product) {
-                if (isAttached()) {
-                    view().showAddToCartFailure(product);
-                }
-            }
-        };
-
         // add product to cart
-        this.cartRepository.addProductToCart(product, callback);
+        this.cartRepository
+                .addProductToCart(product)
+                .subscribeOn(schedulers.io())
+                .observeOn(schedulers.mainThread())
+                .subscribe(
+                        cartItem -> view().showProductAddedToCart(product, cartItem),
+                        t -> view().showAddToCartFailure(product)
+                );
     }
 }
