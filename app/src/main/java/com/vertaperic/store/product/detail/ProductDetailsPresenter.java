@@ -13,7 +13,7 @@ import com.vertaperic.store.R;
 import com.vertaperic.store.app.RxSchedulers;
 import com.vertaperic.store.cart.CartItem;
 import com.vertaperic.store.cart.CartRepository;
-import com.vertaperic.store.mvp.BasePresenter;
+import com.vertaperic.store.mvp.RxBasePresenter;
 import com.vertaperic.store.product.Product;
 
 import javax.inject.Inject;
@@ -24,7 +24,7 @@ import javax.inject.Inject;
  *
  * @author Anny Patel
  */
-class ProductDetailsPresenter extends BasePresenter<ProductDetailsContract.View>
+class ProductDetailsPresenter extends RxBasePresenter<ProductDetailsContract.View>
         implements ProductDetailsContract.Presenter {
 
     /**
@@ -74,7 +74,7 @@ class ProductDetailsPresenter extends BasePresenter<ProductDetailsContract.View>
         // else get cart item from repository
         view().setLoadingIndicator(true);
         // get cart item for product
-        this.cartRepository
+        this.disposables.add(this.cartRepository
                 .getCartItem(product)
                 .subscribeOn(schedulers.io())
                 .observeOn(schedulers.mainThread())
@@ -87,19 +87,19 @@ class ProductDetailsPresenter extends BasePresenter<ProductDetailsContract.View>
                             view().setLoadingIndicator(false);
                             view().showProductDetails(product, null);
                         }
-                );
+                ));
     }
 
     @Override
     public void addProductToCart(@NonNull Product product) {
         // add product to cart
-        this.cartRepository
+        this.disposables.add(this.cartRepository
                 .addProductToCart(product)
                 .subscribeOn(schedulers.io())
                 .observeOn(schedulers.mainThread())
                 .subscribe(
                         cartItem -> view().showProductAddedToCart(product, cartItem),
                         t -> view().showAddToCartFailure(product)
-                );
+                ));
     }
 }

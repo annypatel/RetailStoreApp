@@ -9,7 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.vertaperic.store.app.RxSchedulers;
-import com.vertaperic.store.mvp.BasePresenter;
+import com.vertaperic.store.mvp.RxBasePresenter;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ import io.reactivex.Single;
  *
  * @author Anny Patel
  */
-class CategoriesPresenter extends BasePresenter<CategoriesContract.View>
+class CategoriesPresenter extends RxBasePresenter<CategoriesContract.View>
         implements CategoriesContract.Presenter {
 
     /**
@@ -60,7 +60,7 @@ class CategoriesPresenter extends BasePresenter<CategoriesContract.View>
             categoriesSingle = this.repository.getSubCategories(mainCategory);
         }
 
-        categoriesSingle
+        this.disposables.add(categoriesSingle
                 .subscribeOn(schedulers.io())
                 .observeOn(schedulers.mainThread())
                 .subscribe(categories -> {
@@ -71,7 +71,7 @@ class CategoriesPresenter extends BasePresenter<CategoriesContract.View>
                     } else {
                         view().showCategories(categories);
                     }
-                });
+                }));
     }
 
     @Override

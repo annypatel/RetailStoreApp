@@ -42,7 +42,6 @@ public class BasePresenter<V extends IView> implements IPresenter {
     /**
      * Called when view is detached from presenter.
      */
-    @SuppressWarnings("WeakerAccess")
     protected void onViewDetached() {
     }
 

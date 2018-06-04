@@ -8,7 +8,7 @@ package com.vertaperic.store.cart;
 import android.support.annotation.NonNull;
 
 import com.vertaperic.store.app.RxSchedulers;
-import com.vertaperic.store.mvp.BasePresenter;
+import com.vertaperic.store.mvp.RxBasePresenter;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ import javax.inject.Inject;
  *
  * @author Anny Patel
  */
-class MyCartPresenter extends BasePresenter<MyCartContract.View>
+class MyCartPresenter extends RxBasePresenter<MyCartContract.View>
         implements MyCartContract.Presenter {
 
     /**
@@ -55,7 +55,7 @@ class MyCartPresenter extends BasePresenter<MyCartContract.View>
         view().setLoadingIndicator(true);
 
         // get cart product items
-        this.repository
+        this.disposables.add(this.repository
                 .getCartProductItems()
                 .subscribeOn(schedulers.io())
                 .observeOn(schedulers.mainThread())
@@ -72,7 +72,7 @@ class MyCartPresenter extends BasePresenter<MyCartContract.View>
                             view().setLoadingIndicator(false);
                             view().showCartIsEmpty();
                         }
-                );
+                ));
     }
 
     @Override
@@ -88,7 +88,7 @@ class MyCartPresenter extends BasePresenter<MyCartContract.View>
     @Override
     public void removeProductFromCart(@NonNull final CartProductItems cartProductItems, @NonNull CartProductItem cartProductItem) {
         // remove product from cart
-        this.repository
+        this.disposables.add(this.repository
                 .removeProductFromCart(cartProductItem)
                 .map(count -> count > 0)
                 .subscribeOn(schedulers.io())
@@ -103,7 +103,7 @@ class MyCartPresenter extends BasePresenter<MyCartContract.View>
                             }
                         },
                         t -> view().showRemovalFromCartFailed(cartProductItem)
-                );
+                ));
     }
 
     /**

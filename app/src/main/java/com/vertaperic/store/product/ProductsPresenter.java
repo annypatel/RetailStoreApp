@@ -9,7 +9,7 @@ import android.support.annotation.NonNull;
 
 import com.vertaperic.store.app.RxSchedulers;
 import com.vertaperic.store.category.Category;
-import com.vertaperic.store.mvp.BasePresenter;
+import com.vertaperic.store.mvp.RxBasePresenter;
 
 import javax.inject.Inject;
 
@@ -19,7 +19,7 @@ import javax.inject.Inject;
  *
  * @author Anny Patel
  */
-class ProductsPresenter extends BasePresenter<ProductsContract.View>
+class ProductsPresenter extends RxBasePresenter<ProductsContract.View>
         implements ProductsContract.Presenter {
 
     /**
@@ -48,7 +48,7 @@ class ProductsPresenter extends BasePresenter<ProductsContract.View>
     public void loadProducts(@NonNull Category category) {
         view().setLoadingIndicator(true);
         // get products from repository
-        this.repository
+        this.disposables.add(this.repository
                 .getProducts(category)
                 .subscribeOn(schedulers.io())
                 .observeOn(schedulers.mainThread())
@@ -60,7 +60,7 @@ class ProductsPresenter extends BasePresenter<ProductsContract.View>
                     } else {
                         view().showProducts(products);
                     }
-                });
+                }));
     }
 
     @Override
